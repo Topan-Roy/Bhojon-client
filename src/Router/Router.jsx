@@ -1,0 +1,74 @@
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../Layout/RootLayout";
+import Home from "../Pages/Home/Home";
+import AuthLayout from "../Layout/AuthLayout";
+import Register from "../Authentication/Register/Register";
+import Login from "../Authentication/Login/Login";
+
+
+
+
+import ManuMAnu from "../Pages/Manu/ManuMAnu";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import ReservationRes from "../Pages/Reservation/ReservationRes";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import Team from "../Pages/Team/Team";
+import Gallery from "../Pages/Gallery/Gallery";
+import NotFoundPage from "../Shared/NotFoundPage";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component:RootLayout,
+    children:[
+        {
+            index:true,
+            Component:Home
+        },
+        {
+          path:'aboutus',
+          Component:AboutUs
+        },
+        {
+        path: 'reservation',
+        Component: ReservationRes
+      },
+        {
+        path:'manu',
+        Component: ManuMAnu
+      },
+        {
+        path:'contactus',
+        Component: ContactUs
+      },
+        {
+        path:'team',
+        Component: Team
+      },
+        {
+        path:'gallery',
+        Component: Gallery
+      },
+    ]
+  },
+   {
+    path: '/',
+    Component: AuthLayout,
+    children: [
+      {
+        path: 'login',
+        Component: Login
+      },
+      {
+        path: 'register',
+        Component: Register
+      },
+      
+
+    ]
+  },
+   {
+     path: "/*",
+    Component:NotFoundPage
+  }
+]);
