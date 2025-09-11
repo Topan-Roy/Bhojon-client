@@ -7,6 +7,7 @@ import ChefSelection from '../ChefSelection/ChefSelection';
 import ExpertChefs from '../ExpertChefs/ExpertChefs';
 import GallerySlider from '../GallerySlider/GallerySlider';
 import Testimonials from '../Testimonials/Testimonials';
+import ScrollToTopButton from '../ScrollToTopButton/ScrollToTopButton';
 
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
             <ChefSelection></ChefSelection>
             <ExpertChefs></ExpertChefs>
           <Testimonials></Testimonials>
+          <ScrollToTopButton></ScrollToTopButton>
         </div>
     );
 };
