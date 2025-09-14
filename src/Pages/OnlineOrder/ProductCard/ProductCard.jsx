@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router"; 
 
 const ProductCard = () => {
   const [categories, setCategories] = useState([]);
@@ -8,11 +9,12 @@ const ProductCard = () => {
   const [quantities, setQuantities] = useState({});
   const [search, setSearch] = useState("");
 
-  // Modal state
+  
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Fetch categories & products
+  const navigate = useNavigate(); 
+
   useEffect(() => {
     fetch("http://localhost:3000/api/categories")
       .then((res) => res.json())
@@ -37,7 +39,7 @@ const ProductCard = () => {
     }));
   };
 
-  // Open modal
+ 
   const handleOpenModal = (product) => {
     const quantity = quantities[product._id] || 0;
     if (quantity === 0) return;
@@ -45,7 +47,7 @@ const ProductCard = () => {
     setShowModal(true);
   };
 
-  // Confirm add to cart
+ 
   const handleConfirmAdd = () => {
     if (!selectedProduct) return;
     const found = cart.find((item) => item._id === selectedProduct._id);
@@ -88,6 +90,11 @@ const ProductCard = () => {
   const discount = 0;
   const total = subtotal + vat - discount;
 
+  
+  const handleGoToCheckout = () => {
+    navigate("/checkoutpage", { state: { cart } });
+  };
+
   return (
     <div className="flex p-6 bg-[#f5f2ea] min-h-screen">
       {/* Left side */}
@@ -121,7 +128,7 @@ const ProductCard = () => {
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredProducts.map((product) => {
             const quantity = quantities[product._id] || 0;
             return (
@@ -233,7 +240,10 @@ const ProductCard = () => {
           </div>
         </div>
 
-        <button className="mt-4 w-full bg-[#c09342] text-white py-2 rounded hover:bg-[#a37b30]">
+        <button
+          onClick={handleGoToCheckout}
+          className="mt-4 w-full bg-[#c09342] text-white py-2 rounded hover:bg-[#a37b30]"
+        >
           🛒 Go to Checkout
         </button>
       </div>
@@ -260,7 +270,9 @@ const ProductCard = () => {
 
             <div className="flex justify-between font-bold text-lg border-t pt-2 mt-2">
               <span>Total</span>
-              <span>${(selectedProduct.price * selectedProduct.quantity).toFixed(2)}</span>
+              <span>
+                ${(selectedProduct.price * selectedProduct.quantity).toFixed(2)}
+              </span>
             </div>
 
             <div className="flex justify-center gap-4 mt-4">
@@ -272,8 +284,7 @@ const ProductCard = () => {
               </button>
               <button
                 onClick={handleConfirmAdd}
-                className="px-4 py-2 rounded bg-[#c09342]
-                 text-white hover:bg-[#198754]"
+                className="px-4 py-2 rounded bg-[#c09342] text-white hover:bg-[#198754]"
               >
                 Add to Cart
               </button>

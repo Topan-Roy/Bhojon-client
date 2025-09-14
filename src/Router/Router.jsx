@@ -16,6 +16,7 @@ import Team from "../Pages/Team/Team";
 import Gallery from "../Pages/Gallery/Gallery";
 import NotFoundPage from "../Shared/NotFoundPage";
 import OnlineOrder from "../Pages/OnlineOrder/OnlineOrder";
+import CheckoutPage from "../Pages/OnlineOrder/CheckoutPage/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
         {
         path:'onlineorder',
         Component: OnlineOrder
+      },
+        {
+        path:'checkoutpage',
+        Component: CheckoutPage
       },
 
     ]
