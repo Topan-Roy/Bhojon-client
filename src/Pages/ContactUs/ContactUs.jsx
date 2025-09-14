@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 
 import ContactPage from "../Gallery/ContactPage";
+import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 const  ContactUs = () => {
  
@@ -22,6 +23,7 @@ const  ContactUs = () => {
   </p>
       </motion.div>
    <ContactPage></ContactPage>
+   <ScrollToTopButton></ScrollToTopButton>
     </div>
     
   );

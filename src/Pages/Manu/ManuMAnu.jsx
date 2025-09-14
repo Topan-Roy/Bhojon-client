@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import FoodMenu from "../FoodMenu/FoodMenu";
 import ChefSelection from "../ChefSelection/ChefSelection";
 import Reservation from "../Reservation/Reservation";
+import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 const ManuMAnu = () => {
 
@@ -25,6 +26,7 @@ const ManuMAnu = () => {
             <FoodMenu></FoodMenu>
             <ChefSelection></ChefSelection>
             <Reservation></Reservation>
+             <ScrollToTopButton></ScrollToTopButton>
         </div>
 
     );

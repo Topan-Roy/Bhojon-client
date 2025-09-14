@@ -6,6 +6,7 @@ import Reservation from "./Reservation";
 import GallerySlider from "../GallerySlider/GallerySlider";
 import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
 import ExpertChefs from "../ExpertChefs/ExpertChefs";
+import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 const ReservationRes = () => {
  
@@ -27,6 +28,7 @@ const ReservationRes = () => {
             <GallerySlider></GallerySlider>
             <WhyChooseUs></WhyChooseUs>
             <ExpertChefs></ExpertChefs>
+             <ScrollToTopButton></ScrollToTopButton>
     </div>
   );
 };

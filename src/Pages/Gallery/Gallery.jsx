@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { Link } from "react-router";
 import ImageGallery from "./ImageGallery";
+import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 
 
@@ -24,6 +25,7 @@ const  Gallery = () => {
   </p>
       </motion.div>
      <ImageGallery></ImageGallery>
+      <ScrollToTopButton></ScrollToTopButton>
     </div>
     
   );

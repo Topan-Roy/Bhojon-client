@@ -52,9 +52,11 @@ const Navbar = () => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-4">
-            <button className="bg-[#112a2a] text-white px-4 py-2 rounded-lg hover:bg-[#1f3433] transition cursor-pointer">
+            <NavLink to='/onlineorder'>
+              <button className="bg-[#112a2a] text-white px-4 py-2 rounded-lg hover:bg-[#1f3433] transition cursor-pointer">
               Online-order
             </button>
+            </NavLink>
             <button className="relative p-2 rounded-full hover:bg-[#c09342] cursor-pointer">
               <ShoppingCart className="h-6 w-6 text-[#ffffff]" />
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">

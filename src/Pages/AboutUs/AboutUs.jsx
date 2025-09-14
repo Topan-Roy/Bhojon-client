@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
 import LuxuryRestaurant from "../LuxuryRestaurant/LuxuryRestaurant";
+import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
 
 const  AboutUs = () => {
  
@@ -23,6 +24,7 @@ const  AboutUs = () => {
       </motion.div>
       <LuxuryRestaurant></LuxuryRestaurant>
     <WhyChooseUs></WhyChooseUs>
+     <ScrollToTopButton></ScrollToTopButton>
     </div>
     
   );

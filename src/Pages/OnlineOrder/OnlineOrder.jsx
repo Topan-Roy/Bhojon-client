@@ -5,8 +5,9 @@ import { Link } from "react-router";
 
 import ExpertChefs from "../ExpertChefs/ExpertChefs";
 import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
+import ProductCard from "./ProductCard/ProductCard";
 
-const  Team = () => {
+const OnlineOrder = () => {
  
   return (
     <div className=" bg-white mt-10">
@@ -19,10 +20,10 @@ const  Team = () => {
       >
         <h1 className="text-5xl text-[#ffffff] font-medium"> Team</h1>
          <p className="text-xl text-[#c09342] mt-2">
-    <Link to="/" className=" text-[#c09342]">Home</Link> -  Team
+    <Link to="/" className=" text-[#c09342]">Home</Link> -  OnlineOrder
   </p>
       </motion.div>
-     <ExpertChefs></ExpertChefs>
+    <ProductCard></ProductCard>
       <ScrollToTopButton></ScrollToTopButton>
     </div>
     
@@ -30,4 +31,4 @@ const  Team = () => {
  
 };
 
-export default Team;
+export default OnlineOrder;

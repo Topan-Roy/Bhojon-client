@@ -15,6 +15,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import Team from "../Pages/Team/Team";
 import Gallery from "../Pages/Gallery/Gallery";
 import NotFoundPage from "../Shared/NotFoundPage";
+import OnlineOrder from "../Pages/OnlineOrder/OnlineOrder";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ export const router = createBrowserRouter([
         path:'gallery',
         Component: Gallery
       },
+        {
+        path:'onlineorder',
+        Component: OnlineOrder
+      },
+
     ]
   },
    {
