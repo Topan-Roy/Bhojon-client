@@ -35,6 +35,7 @@ const Register = () => {
         phone: data.phone,
         address: data.address,
         picture: imgURL,
+        role: "user",
       };
 
       await axios.post("http://localhost:3000/api/register", userData);

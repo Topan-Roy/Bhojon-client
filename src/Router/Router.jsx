@@ -17,6 +17,9 @@ import Gallery from "../Pages/Gallery/Gallery";
 import NotFoundPage from "../Shared/NotFoundPage";
 import OnlineOrder from "../Pages/OnlineOrder/OnlineOrder";
 import CheckoutPage from "../Pages/OnlineOrder/CheckoutPage/CheckoutPage";
+import AdminDashboard from "../Layout/AdminDashboard";
+import Dashboard from "../Pages/ADashboard/Dashboard/Dashboard";
+import ManageOrder from "../Pages/ADashboard/ManageOrder/ManageOrder";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +77,23 @@ export const router = createBrowserRouter([
         path: 'register',
         Component: Register
       },
+      
+
+    ]
+  },
+   {
+    path: '/dashboard',
+    Component: AdminDashboard,
+    children: [
+      {
+        path: 'dashboard',
+        Component: Dashboard
+      },
+      {
+        path:'manageorder',
+        Component: ManageOrder
+      },
+      
       
 
     ]

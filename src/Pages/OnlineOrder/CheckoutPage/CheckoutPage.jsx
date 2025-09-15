@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import CardPage from "../CardPage/CardPage";
+import { AuthContext } from "../../../Contexts/Context";
 
 
 const CheckoutPage = () => {
   const location = useLocation();
- 
+ const { user } = useContext(AuthContext);
 
   const [cart, setCart] = useState(location.state?.cart || []);
   const [shipping, setShipping] = useState("Pickup");
@@ -71,8 +72,9 @@ const CheckoutPage = () => {
         deliveryCharge,
         total,
         orderDate: new Date().toISOString(),
+         userEmail: user?.email || "Guest",
       };
-
+console.log("Booking user:", user);
       const response = await axios.post("http://localhost:3000/api/bookings", bookingData);
 
       if (response.data.success) {

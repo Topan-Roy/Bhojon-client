@@ -96,7 +96,7 @@ const ProductCard = () => {
   };
 
   return (
-    <div className="flex p-6 bg-[#f5f2ea] min-h-screen">
+    <div className="flex p-6 bg-[#f5f2ea] max-w-7xl mx-auto">
       {/* Left side */}
       <div className="w-3/4 pr-4">
         <div className="flex items-center justify-between mb-4">
@@ -212,7 +212,7 @@ const ProductCard = () => {
                   onClick={() => handleDeleteFromCart(item._id)}
                   className="text-red-500 hover:text-red-700 font-bold px-2"
                 >
-                  ❌
+                  🗑
                 </button>
               </div>
             </div>

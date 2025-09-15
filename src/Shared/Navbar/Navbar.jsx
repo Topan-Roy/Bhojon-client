@@ -1,14 +1,28 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import logo from "../../assets/p2.png";
 import { NavLink } from "react-router";
+import { AuthContext } from "../../Contexts/Context";
+import axios from "axios";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logoutUser } = useContext(AuthContext);
+  const [role, setRole] = useState(null);
+
+  // Fetch user role from backend
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/users/${user.email}`)
+        .then((res) => setRole(res.data.role))
+        .catch((err) => console.error(err));
+    }
+  }, [user]);
 
   const linkClass = ({ isActive }) =>
     isActive
-      ? "text-[#c09342] font-bold "
+      ? "text-[#c09342] font-bold"
       : "text-white font-medium hover:text-[#c09342]";
 
   return (
@@ -24,55 +38,50 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            <NavLink to="/" className={linkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/reservation" className={linkClass}>
-              Reservation
-            </NavLink>
-            <NavLink to="/manu" className={linkClass}>
-              Menu
-            </NavLink>
-            <NavLink to="/aboutus" className={linkClass}>
-              About Us
-            </NavLink>
-            <NavLink to="/contactus" className={linkClass}>
-              Contact Us
-            </NavLink>
-            <NavLink to="/gallery" className={linkClass}>
-              Gallery
-            </NavLink>
-            <NavLink to="/team" className={linkClass}>
-              Team
-            </NavLink>
-            <NavLink to="/login" className={linkClass}>
-              Login
-            </NavLink>
+            <NavLink to="/" className={linkClass}>Home</NavLink>
+            <NavLink to="/reservation" className={linkClass}>Reservation</NavLink>
+            <NavLink to="/manu" className={linkClass}>Menu</NavLink>
+            <NavLink to="/aboutus" className={linkClass}>About Us</NavLink>
+            <NavLink to="/contactus" className={linkClass}>Contact Us</NavLink>
+            <NavLink to="/gallery" className={linkClass}>Gallery</NavLink>
+            <NavLink to="/team" className={linkClass}>Team</NavLink>
+
+            {/* Conditional Links */}
+            {user && role === "admin" && (
+              <NavLink to="/dashboard" className={linkClass}>Dashboard</NavLink>
+            )}
+
+            {!user && (
+              <NavLink to="/login" className={linkClass}>Login</NavLink>
+            )}
           </div>
 
           {/* Right Side */}
           <div className="flex items-center space-x-4">
             <NavLink to='/onlineorder'>
               <button className="bg-[#112a2a] text-white px-4 py-2 rounded-lg hover:bg-[#1f3433] transition cursor-pointer">
-              Online-order
-            </button>
+                Online-order
+              </button>
             </NavLink>
             <button className="relative p-2 rounded-full hover:bg-[#c09342] cursor-pointer">
               <ShoppingCart className="h-6 w-6 text-[#ffffff]" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
-                0
-              </span>
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">0</span>
             </button>
+
+            {/* Logout Button */}
+            {user && (
+              <button
+                onClick={logoutUser}
+                className="bg-[#d63384] text-white px-3 py-1 rounded hover:bg-[#d63384] transition"
+              >
+                Logout
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-200 hover:text-red-500 text-2xl"
-            >
-              ☰
-            </button>
+            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-200 hover:text-red-500 text-2xl">☰</button>
           </div>
         </div>
       </div>
@@ -81,30 +90,31 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-[#112a2a] border-t">
           <div className="flex flex-col px-4 py-2 space-y-2">
-            <NavLink to="/" className={linkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/reservation" className={linkClass}>
-              Reservation
-            </NavLink>
-            <NavLink to="/manu" className={linkClass}>
-              Menu
-            </NavLink>
-            <NavLink to="/aboutus" className={linkClass}>
-              About Us
-            </NavLink>
-            <NavLink to="/contactus" className={linkClass}>
-              Contact Us
-            </NavLink>
-            <NavLink to="/gallery" className={linkClass}>
-              Gallery
-            </NavLink>
-            <NavLink to="/team" className={linkClass}>
-              Team
-            </NavLink>
-            <NavLink to="/login" className={linkClass}>
-              Login
-            </NavLink>
+            <NavLink to="/" className={linkClass}>Home</NavLink>
+            <NavLink to="/reservation" className={linkClass}>Reservation</NavLink>
+            <NavLink to="/manu" className={linkClass}>Menu</NavLink>
+            <NavLink to="/aboutus" className={linkClass}>About Us</NavLink>
+            <NavLink to="/contactus" className={linkClass}>Contact Us</NavLink>
+            <NavLink to="/gallery" className={linkClass}>Gallery</NavLink>
+            <NavLink to="/team" className={linkClass}>Team</NavLink>
+
+            {/* Conditional Links */}
+            {user && role === "admin" && (
+              <NavLink to="/dashboard" className={linkClass}>Dashboard</NavLink>
+            )}
+            {!user && (
+              <NavLink to="/login" className={linkClass}>Login</NavLink>
+            )}
+
+            {/* Mobile Logout */}
+            {user && (
+              <button
+                onClick={logoutUser}
+                className="bg-[#d63384] text-white px-3 py-1 rounded hover:bg-[#d63384] transition mt-2"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       )}

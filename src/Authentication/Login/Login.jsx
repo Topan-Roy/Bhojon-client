@@ -24,7 +24,7 @@ const Login = () => {
       });
 
       reset();
-      navigate("/"); // Redirect to homepage or dashboard
+      navigate("/"); 
     } catch (error) {
       console.error(error);
       Swal.fire({
