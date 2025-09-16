@@ -79,6 +79,7 @@ const AdminDashboard = () => {
             children: [
                 { text: "All Orders", path: "/dashboard/manageorder" },
                 { text: "Completed Orders", path: "/dashboard/completedbookings" },
+                { text: "pending Orders", path: "/dashboard/pendingbookings" },
             ],
         },
 

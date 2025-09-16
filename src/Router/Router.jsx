@@ -21,6 +21,7 @@ import AdminDashboard from "../Layout/AdminDashboard";
 import Dashboard from "../Pages/ADashboard/Dashboard/Dashboard";
 import ManageOrder from "../Pages/ADashboard/ManageOrder/ManageOrder";
 import CompletedBookings from "../Pages/ADashboard/CompletedBookings/CompletedBookings";
+import PendingBookings from "../Pages/ADashboard/PendingBookings/PendingBookings";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path:'completedbookings',
         Component: CompletedBookings
+      },
+      {
+        path:'pendingbookings',
+        Component: PendingBookings
       },
       
       
