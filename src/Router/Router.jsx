@@ -25,6 +25,8 @@ import PendingBookings from "../Pages/ADashboard/PendingBookings/PendingBookings
 import RejectedBookings from "../Pages/ADashboard/RejectedBookings/RejectedBookings";
 import AddFoodForm from "../Pages/ADashboard/FoodManagement/AddFoodForm/AddFoodForm";
 import AdminFoodList from "../Pages/ADashboard/FoodManagement/AdminFoodList/AdminFoodList";
+import AddCategoryForm from "../Pages/ADashboard/FoodManagement/AddCategoryForm/AddCategoryForm";
+import CategoryList from "../Pages/ADashboard/FoodManagement/CategoryList/CategoryList";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +119,14 @@ export const router = createBrowserRouter([
       {
         path:'adminfoodlist',
         Component:AdminFoodList
+      },
+      {
+        path:'addcategoryform',
+        Component:AddCategoryForm
+      },
+      {
+        path:'categorylist',
+        Component:CategoryList
       },
       
       

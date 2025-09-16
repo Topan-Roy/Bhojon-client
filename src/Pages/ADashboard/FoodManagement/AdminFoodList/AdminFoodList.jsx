@@ -7,6 +7,11 @@ const AdminFoodList = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Pagination & search state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [foodsPerPage, setFoodsPerPage] = useState(5);
+  const [searchTerm, setSearchTerm] = useState("");
+
   // Fetch all food products
   const fetchFoods = async () => {
     setLoading(true);
@@ -84,51 +89,115 @@ const AdminFoodList = () => {
     }
   };
 
+  // Filtered & searched foods
+  const filteredFoods = foods.filter(
+    (food) =>
+      food.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      food.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Pagination logic
+  const indexOfLastFood = currentPage * foodsPerPage;
+  const indexOfFirstFood = indexOfLastFood - foodsPerPage;
+  const currentFoods = filteredFoods.slice(indexOfFirstFood, indexOfLastFood);
+  const totalPages = Math.ceil(filteredFoods.length / foodsPerPage);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div className="max-w-7xl text-[#000] mx-auto p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-semibold mb-4">Admin Food List</h2>
+
+      {/* Search & Page Size */}
+      <div className="flex justify-between mb-4">
+        <input
+          type="text"
+          placeholder="Search by name or category..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border rounded px-3 py-2 w-1/2"
+        />
+        <select
+          value={foodsPerPage}
+          onChange={(e) => setFoodsPerPage(Number(e.target.value))}
+          className="border rounded px-3 py-2"
+        >
+          <option value={5}>5 per page</option>
+          <option value={10}>10 per page</option>
+          <option value={20}>20 per page</option>
+        </select>
+      </div>
+
       {loading ? (
         <p>Loading...</p>
-      ) : foods.length === 0 ? (
+      ) : currentFoods.length === 0 ? (
         <p>No foods found.</p>
       ) : (
-        <table className="w-full table-auto border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border px-4 py-2">Image</th>
-              <th className="border px-4 py-2">Name</th>
-              <th className="border px-4 py-2">Category</th>
-              <th className="border px-4 py-2">Price</th>
-              <th className="border px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {foods.map((food) => (
-              <tr key={food._id} className="text-center">
-                <td className="border px-4 py-2">
-                  <img src={food.image} alt={food.name} className="w-16 h-16 mx-auto" />
-                </td>
-                <td className="border px-4 py-2">{food.name}</td>
-                <td className="border px-4 py-2">{food.category}</td>
-                <td className="border px-4 py-2">${food.price}</td>
-                <td className="border px-4 py-2 space-x-2">
-                  <button
-                    onClick={() => handleUpdate(food)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                  >
-                     <FiEdit size={20} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(food._id)}
-                    className="bg-red-600 text-white px-2 py-1 rounded"
-                  >
-                     <FiTrash2 size={20} />
-                  </button>
-                </td>
+        <>
+          <table className="w-full table-auto border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border px-4 py-2">Image</th>
+                <th className="border px-4 py-2">Name</th>
+                <th className="border px-4 py-2">Category</th>
+                <th className="border px-4 py-2">Price</th>
+                <th className="border px-4 py-2">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentFoods.map((food) => (
+                <tr key={food._id} className="text-center">
+                  <td className="border px-4 py-2">
+                    <img src={food.image} alt={food.name} className="w-16 h-16 mx-auto" />
+                  </td>
+                  <td className="border px-4 py-2">{food.name}</td>
+                  <td className="border px-4 py-2">{food.category}</td>
+                  <td className="border px-4 py-2">${food.price}</td>
+                  <td className="border px-4 py-2 space-x-2">
+                    <button
+                      onClick={() => handleUpdate(food)}
+                      className="bg-[#20c997] text-white px-2 py-1 rounded"
+                    >
+                      <FiEdit size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(food._id)}
+                      className="bg-[#dc3545] text-white px-2 py-1 rounded"
+                    >
+                      <FiTrash2 size={20} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className="bg-gray-300 px-3 py-1 rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <span className="px-3 py-1">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="bg-gray-300 px-3 py-1 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
