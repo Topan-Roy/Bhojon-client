@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     const [latestOrders, setLatestOrders] = useState([]);
     const [profile, setProfile] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [openMenu, setOpenMenu] = useState(null); 
+    const [openMenu, setOpenMenu] = useState(null);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -84,11 +84,21 @@ const AdminDashboard = () => {
 
         { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation" },
         { icon: <FaShoppingCart />, text: "Purchase Manage", path: "/dashboard/purchase" },
-        { icon: <FaUtensils />, text: "Food Management", path: "/dashboard/food" },
+
+        {
+            icon: <FaUtensils />,
+            text: "Food Management",
+            children: [
+                { text: "Add Food", path: "/dashboard/addfoodform" },
+                { text: "Add Category", path: "/dashboard/addcategory" },
+            ],
+        },
+
         { icon: <FaUsers />, text: "Human Resource", path: "/dashboard/users" },
         { icon: <FaFileAlt />, text: "Report", path: "/dashboard/report" },
         { icon: <FaCog />, text: "Settings", path: "/dashboard/settings" },
     ];
+
 
     const isDashboardPage = location.pathname === "/dashboard";
 

@@ -112,7 +112,7 @@ const ProductCard = () => {
 
         {/* Categories */}
         <div className="flex text-[#000] space-x-4 overflow-x-auto mb-4">
-          {["", ...categories].map((cat, idx) => (
+          {["All Items", ...categories].map((cat, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedCategory(cat)}
