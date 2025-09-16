@@ -2,18 +2,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const PendingBookings = () => {
-  const [pendingOrders, setPendingOrders] = useState([]);
+const RejectedBookings = () => {
+  const [rejectedOrders, setRejectedOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const fetchPendingOrders = async () => {
+
+ 
+  const fetchRejectedOrders = async () => {
     setLoading(true);
     try {
       const res = await axios.get("http://localhost:3000/api/admin/bookings");
       if (res.data.success) {
         const filtered = res.data.bookings.filter(
-          (order) => order.status === "pending"
+          (order) => order.status === "rejected"
         );
-        setPendingOrders(filtered);
+        setRejectedOrders(filtered);
       }
     } catch (error) {
       console.error(error);
@@ -23,17 +25,17 @@ const PendingBookings = () => {
   };
 
   useEffect(() => {
-    fetchPendingOrders();
+    fetchRejectedOrders();
   }, []);
 
-  if (loading) return <p>Loading pending bookings...</p>;
+  if (loading) return <p>Loading rejected bookings...</p>;
 
   return (
     <div className="p-6 text-[#000] bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">⏳ Pending Bookings</h1>
+      <h1 className="text-2xl font-bold mb-4">❌ Rejected Bookings</h1>
 
-      {pendingOrders.length === 0 ? (
-        <p>No pending bookings found.</p>
+      {rejectedOrders.length === 0 ? (
+        <p>No rejected bookings found.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white rounded shadow">
@@ -47,7 +49,7 @@ const PendingBookings = () => {
               </tr>
             </thead>
             <tbody>
-              {pendingOrders.map((order) => (
+              {rejectedOrders.map((order) => (
                 <tr key={order._id} className="border-t hover:bg-gray-50">
                   <td className="p-3">{order.userEmail}</td>
                   <td className="p-3">
@@ -62,8 +64,8 @@ const PendingBookings = () => {
                     {new Date(order.orderDate).toLocaleString()}
                   </td>
                   <td className="p-3">
-                    <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm font-medium">
-                      Pending
+                    <span className="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm font-medium">
+                      Rejected
                     </span>
                   </td>
                 </tr>
@@ -76,4 +78,4 @@ const PendingBookings = () => {
   );
 };
 
-export default PendingBookings;
+export default RejectedBookings;

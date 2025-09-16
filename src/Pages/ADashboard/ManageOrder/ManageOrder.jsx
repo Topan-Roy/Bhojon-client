@@ -139,7 +139,7 @@ const ManageOrder = () => {
                         onClick={() => handleCancel(order._id)}
                         className="px-4 py-1 rounded-md bg-red-500 hover:bg-red-600 text-white shadow transition duration-200 text-sm font-medium"
                       >
-                        Delete
+                        🗑
                       </button>
                     </div>
                   </td>

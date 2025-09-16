@@ -27,13 +27,12 @@ const AdminDashboard = () => {
     const [latestOrders, setLatestOrders] = useState([]);
     const [profile, setProfile] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [openMenu, setOpenMenu] = useState(null); // dropdown toggle
+    const [openMenu, setOpenMenu] = useState(null); 
 
     const location = useLocation();
     const navigate = useNavigate();
     const toggleSidebar = () => setIsOpen(!isOpen);
 
-    // Fetch user profile
     const fetchProfile = async () => {
         if (user?.email) {
             try {
@@ -50,7 +49,6 @@ const AdminDashboard = () => {
         fetchProfile();
     }, [user]);
 
-    // Fetch stats
     useEffect(() => {
         fetch("http://localhost:3000/api/admin/stats")
             .then((res) => res.json())
@@ -79,7 +77,8 @@ const AdminDashboard = () => {
             children: [
                 { text: "All Orders", path: "/dashboard/manageorder" },
                 { text: "Completed Orders", path: "/dashboard/completedbookings" },
-                { text: "pending Orders", path: "/dashboard/pendingbookings" },
+                { text: "Pending Orders", path: "/dashboard/pendingbookings" },
+                { text: "Reject Orders", path: "/dashboard/rejectedbookings" },
             ],
         },
 
@@ -93,7 +92,6 @@ const AdminDashboard = () => {
 
     const isDashboardPage = location.pathname === "/dashboard";
 
-    // Profile edit handlers
     const handleProfileChange = (e) => {
         const { name, value } = e.target;
         setProfile({ ...profile, [name]: value });
@@ -129,7 +127,6 @@ const AdminDashboard = () => {
 
     return (
         <div className="flex">
-            {/* Sidebar overlay for mobile */}
             <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
@@ -314,9 +311,10 @@ const AdminDashboard = () => {
                             <p className="text-sm mt-1">Today Orders</p>
                         </div>
                         <div className="p-5 rounded-xl shadow text-white bg-yellow-500">
-                            <h3 className="text-3xl font-bold">{stats.todaySales}</h3>
-                            <p className="text-sm mt-1">Today Sale</p>
+                            <h3 className="text-3xl font-bold">{stats.completedOrders}</h3>
+                            <p className="text-sm mt-1">Completed Bookings</p>
                         </div>
+
                         <div className="p-5 rounded-xl shadow text-white bg-pink-500">
                             <h3 className="text-3xl font-bold">{stats.totalCustomers}</h3>
                             <p className="text-sm mt-1">Total Customers</p>
