@@ -90,6 +90,7 @@ const AdminDashboard = () => {
             text: "Food Management",
             children: [
                 { text: "Add Food", path: "/dashboard/addfoodform" },
+                { text: "Food List", path: "/dashboard/adminfoodlist" },
                 { text: "Add Category", path: "/dashboard/addcategory" },
             ],
         },

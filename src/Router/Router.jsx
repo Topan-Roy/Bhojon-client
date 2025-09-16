@@ -24,6 +24,7 @@ import CompletedBookings from "../Pages/ADashboard/CompletedBookings/CompletedBo
 import PendingBookings from "../Pages/ADashboard/PendingBookings/PendingBookings";
 import RejectedBookings from "../Pages/ADashboard/RejectedBookings/RejectedBookings";
 import AddFoodForm from "../Pages/ADashboard/FoodManagement/AddFoodForm/AddFoodForm";
+import AdminFoodList from "../Pages/ADashboard/FoodManagement/AdminFoodList/AdminFoodList";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path:'addfoodform',
         Component: AddFoodForm
+      },
+      {
+        path:'adminfoodlist',
+        Component:AdminFoodList
       },
       
       
