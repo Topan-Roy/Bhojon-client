@@ -43,7 +43,7 @@ const ManageOrder = () => {
         const res = await axios.delete(`http://localhost:3000/api/admin/bookings/${id}`);
         if (res.data.success) {
           Swal.fire("Deleted!", "Booking has been cancelled.", "success");
-          fetchOrders(); // Refresh orders
+          fetchOrders();
         } else {
           Swal.fire("Error", res.data.message || "Failed to cancel booking", "error");
         }
@@ -53,6 +53,25 @@ const ManageOrder = () => {
       }
     }
   };
+  const handleUpdateStatus = async (id, status) => {
+    try {
+      const res = await axios.patch(
+        `http://localhost:3000/api/admin/bookings/${id}`,
+        { status }
+      );
+
+      if (res.data.success) {
+        Swal.fire("Updated!", `Booking ${status}`, "success");
+        fetchOrders();
+      } else {
+        Swal.fire("Error", res.data.message || "Failed to update status", "error");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Server error while updating booking", "error");
+    }
+  };
+
 
   if (loading) return <p>Loading orders...</p>;
 
@@ -88,13 +107,45 @@ const ManageOrder = () => {
                   <td className="p-3">${order.total.toFixed(2)}</td>
                   <td className="p-3">{new Date(order.orderDate).toLocaleString()}</td>
                   <td className="p-3">
-                    <button
-                      onClick={() => handleCancel(order._id)}
-                      className="bg-red-500 hover:bg-red-500 text-white px-3 py-1 rounded"
-                    >
-                       🗑
-                    </button>
+                    <div className="flex items-center gap-3">
+                      {/* Complete */}
+                      <button
+                        onClick={() => handleUpdateStatus(order._id, "completed")}
+                        disabled={order.status !== "pending"}
+                        className={`px-4 py-1 rounded-md shadow text-sm font-medium transition duration-200
+        ${order.status === "completed"
+                            ? "bg-green-700 text-white cursor-default"
+                            : "bg-green-500 hover:bg-green-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                          }`}
+                      >
+                        {order.status === "completed" ? "Completed ✅" : "Complete"}
+                      </button>
+
+                      {/* Reject */}
+                      <button
+                        onClick={() => handleUpdateStatus(order._id, "rejected")}
+                        disabled={order.status !== "pending"}
+                        className={`px-4 py-1 rounded-md shadow text-sm font-medium transition duration-200
+        ${order.status === "rejected"
+                            ? "bg-yellow-700 text-white cursor-default"
+                            : "bg-yellow-500 hover:bg-yellow-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                          }`}
+                      >
+                        {order.status === "rejected" ? "Rejected ❌" : "Reject"}
+                      </button>
+
+                      {/* Delete */}
+                      <button
+                        onClick={() => handleCancel(order._id)}
+                        className="px-4 py-1 rounded-md bg-red-500 hover:bg-red-600 text-white shadow transition duration-200 text-sm font-medium"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
+
+
+
                 </tr>
               ))}
             </tbody>

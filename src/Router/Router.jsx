@@ -20,6 +20,7 @@ import CheckoutPage from "../Pages/OnlineOrder/CheckoutPage/CheckoutPage";
 import AdminDashboard from "../Layout/AdminDashboard";
 import Dashboard from "../Pages/ADashboard/Dashboard/Dashboard";
 import ManageOrder from "../Pages/ADashboard/ManageOrder/ManageOrder";
+import CompletedBookings from "../Pages/ADashboard/CompletedBookings/CompletedBookings";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path:'manageorder',
         Component: ManageOrder
+      },
+      {
+        path:'completedbookings',
+        Component: CompletedBookings
       },
       
       

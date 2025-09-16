@@ -27,6 +27,8 @@ const AdminDashboard = () => {
     const [latestOrders, setLatestOrders] = useState([]);
     const [profile, setProfile] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [openMenu, setOpenMenu] = useState(null); // dropdown toggle
+
     const location = useLocation();
     const navigate = useNavigate();
     const toggleSidebar = () => setIsOpen(!isOpen);
@@ -70,7 +72,16 @@ const AdminDashboard = () => {
 
     const menuItems = [
         { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard" },
-        { icon: <FaClipboardList />, text: "Manage Order", path: "/dashboard/manageorder" },
+
+        {
+            icon: <FaClipboardList />,
+            text: "Manage Order",
+            children: [
+                { text: "All Orders", path: "/dashboard/manageorder" },
+                { text: "Completed Orders", path: "/dashboard/completedbookings" },
+            ],
+        },
+
         { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation" },
         { icon: <FaShoppingCart />, text: "Purchase Manage", path: "/dashboard/purchase" },
         { icon: <FaUtensils />, text: "Food Management", path: "/dashboard/food" },
@@ -110,22 +121,28 @@ const AdminDashboard = () => {
             console.error("Logout failed:", err);
         }
     };
+
+    const toggleMenu = (i) => {
+        setOpenMenu(openMenu === i ? null : i);
+    };
+
     return (
         <div className="flex">
-            {/* Sidebar */}
+            {/* Sidebar overlay for mobile */}
             <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
                 onClick={() => setIsOpen(false)}
             ></div>
 
+            {/* Sidebar */}
             <aside
                 className={`fixed md:static top-0 left-0 h-full w-64 bg-gray-900 text-white transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
                 {/* Profile */}
                 <div className="p-6 text-center border-b border-gray-700">
-                    <BhojonNext></BhojonNext>
+                    <BhojonNext />
                     {profile && !isEditing && (
                         <>
                             <img
@@ -182,14 +199,14 @@ const AdminDashboard = () => {
                             <div className="flex justify-between mt-2">
                                 <button
                                     type="submit"
-                                    className="flex items-center gap-2 bg-[#198754] hover:bg-[#198754] px-3 py-1 rounded text-white"
+                                    className="flex items-center gap-2 bg-[#198754] px-3 py-1 rounded text-white"
                                 >
                                     Save
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setIsEditing(false)}
-                                    className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 px-3 py-1 rounded text-white"
+                                    className="flex items-center gap-2 bg-gray-500 px-3 py-1 rounded text-white"
                                 >
                                     Cancel
                                 </button>
@@ -200,21 +217,55 @@ const AdminDashboard = () => {
 
                 {/* Menu */}
                 <nav className="flex-1 p-4 space-y-2">
-                    {menuItems.map((item, i) => (
-                        <NavLink
-                            key={i}
-                            to={item.path}
-                            end={item.path === "/dashboard"}
-                            className={({ isActive }) =>
-                                `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 group ${isActive ? "bg-[#198754] text-white" : "hover:bg-gray-700"
-                                }`
-                            }
-                            onClick={() => setIsOpen(false)}
-                        >
-                            <span className="text-lg group-hover:text-green-400">{item.icon}</span>
-                            <span>{item.text}</span>
-                        </NavLink>
-                    ))}
+                    {menuItems.map((item, i) =>
+                        item.children ? (
+                            <div key={i}>
+                                <button
+                                    onClick={() => toggleMenu(i)}
+                                    className="w-full flex items-center justify-between gap-3 p-3 rounded-lg bg-gray-800 text-white hover:bg-gray-700"
+                                >
+                                    <span className="flex items-center gap-3">
+                                        <span className="text-lg">{item.icon}</span>
+                                        <span>{item.text}</span>
+                                    </span>
+                                    <span>{openMenu === i ? "▲" : "▼"}</span>
+                                </button>
+                                {openMenu === i && (
+                                    <div className="ml-8 mt-1 space-y-1">
+                                        {item.children.map((sub, j) => (
+                                            <NavLink
+                                                key={j}
+                                                to={sub.path}
+                                                className={({ isActive }) =>
+                                                    `block p-2 rounded-md transition ${isActive
+                                                        ? "bg-green-600 text-white"
+                                                        : "hover:bg-gray-700"
+                                                    }`
+                                                }
+                                            >
+                                                {sub.text}
+                                            </NavLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <NavLink
+                                key={i}
+                                to={item.path}
+                                end={item.path === "/dashboard"}
+                                className={({ isActive }) =>
+                                    `flex items-center gap-3 p-3 rounded-lg transition ${isActive
+                                        ? "bg-green-600 text-white"
+                                        : "hover:bg-gray-700"
+                                    }`
+                                }
+                            >
+                                <span className="text-lg">{item.icon}</span>
+                                <span>{item.text}</span>
+                            </NavLink>
+                        )
+                    )}
                 </nav>
             </aside>
 
@@ -243,13 +294,10 @@ const AdminDashboard = () => {
                             className="group relative flex items-center gap-2 bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-white"
                         >
                             <FaSignOutAlt />
-
-                            {/* Tooltip */}
                             <span className="absolute left-1/2 -translate-x-1/2 -bottom-8 opacity-0 group-hover:opacity-100 transition bg-black text-white text-xs rounded py-1 px-2 whitespace-nowrap">
                                 Logout
                             </span>
                         </button>
-
                     </div>
                 </div>
 
@@ -293,7 +341,9 @@ const AdminDashboard = () => {
                                         <tr key={i} className="border-t hover:bg-gray-50">
                                             <td className="p-3">{order.userEmail || order.name}</td>
                                             <td className="p-3 text-green-600">{order._id}</td>
-                                            <td className="p-3">{new Date(order.createdAt).toLocaleTimeString()}</td>
+                                            <td className="p-3">
+                                                {new Date(order.createdAt).toLocaleTimeString()}
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
