@@ -64,7 +64,6 @@ const Testimonials = () => {
               whileHover={{ scale: 1.05 }}
               className="relative"
             >
-              {/* Image */}
               <div className="flex justify-center">
                 <img
                   src={testimonial.image}
@@ -72,8 +71,6 @@ const Testimonials = () => {
                   className="w-20 h-20 rounded-full border-4 border-white shadow-md z-10 relative"
                 />
               </div>
-
-              {/* Card */}
               <div className="bg-white text-gray-700 mt-[-40px] pt-12 px-6 pb-6 rounded-tl-[60px] rounded-tr-[10px] rounded-bl-[10px] rounded-br-[60px] shadow-xl">
                 <p className="text-[17px]  font-normal italic leading-relaxed mb-4">
                   “{testimonial.text}”
@@ -96,7 +93,6 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Dots */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

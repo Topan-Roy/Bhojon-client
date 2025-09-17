@@ -5,11 +5,10 @@ import { FaYoutube } from "react-icons/fa";
 const Banner = () => {
   return (
     <section className="relative bg-[#081d1c] w-full h-[90vh] bg-cover bg-center flex items-center mt-10">
-      {/* Overlay */}
+
       <div className="absolute inset-0 bg-[#081d1c]"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
-        {/* Left Side - Text + Buttons */}
         <div className="text-[#ffffff] md:w-1/2 mb-10 md:mb-0">
           <h1 className="text-4xl md:text-6xl font-medium mb-4 font-montserrat mt-40 md:mt-5">
             Delicious food & wonderful eating experience
@@ -47,10 +46,8 @@ const Banner = () => {
             </motion.button>
           </div>
         </div>
-
-        {/* Right Side - Image Grid */}
+  
         <div className="relative md:w-1/2 grid grid-cols-2 gap-4">
-          {/* Left 2 small images stacked */}
           <div className="flex flex-col gap-4">
             <img
               src="https://i.ibb.co.com/N6gTK7xF/H.png"
@@ -63,8 +60,6 @@ const Banner = () => {
               className="rounded-lg object-cover h-[45%]"
             />
           </div>
-
-          {/* Right big image */}
           <div className="relative rounded-lg overflow-hidden">
             <img
               src="https://i.ibb.co.com/VWfYQBDR/H2.png"
@@ -72,8 +67,6 @@ const Banner = () => {
               className="w-full h-full object-cover"
             />
           </div>
-
-          {/* Centered YouTube Icon over all 3 images */}
           <a
             href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             target="_blank"

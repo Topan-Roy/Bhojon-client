@@ -12,7 +12,7 @@ const ReservationRes = () => {
  
   return (
     <div className=" bg-white mt-10">
-      {/* Header */}
+
       <motion.div
         className="bg-[#10241b] text-white text-center py-12"
         initial={{ opacity: 0, y: -50 }}

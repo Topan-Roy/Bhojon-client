@@ -40,7 +40,7 @@ const menuItems = [
   },
 ];
 
-// Animation variants
+
 const fadeDown = {
   hidden: { opacity: 0, y: -50 },
   visible: (i) => ({
@@ -63,7 +63,7 @@ const FoodMenu = () => {
   return (
     <section className="bg-[#f9f6ee] py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
-        {/* Specials */}
+     
         <motion.p
           className="text-yellow-600 text-lg mb-1"
           variants={fadeDown}
@@ -74,8 +74,6 @@ const FoodMenu = () => {
         >
           Specials
         </motion.p>
-
-        {/* FOOD MENU */}
         <motion.h2
           className="text-4xl text-[#3a3a3a] md:text-5xl font-semibold mb-12"
           variants={fadeDown}
@@ -86,8 +84,6 @@ const FoodMenu = () => {
         >
           FOOD MENU
         </motion.h2>
-
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12">
           {menuItems.map((item, index) => (
             <motion.div
@@ -121,8 +117,6 @@ const FoodMenu = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Footer Text */}
         <motion.p
           className="text-3xl md:text-5xl text-gray-800 font-serif mb-6 leading-snug"
           variants={fadeDown}
@@ -133,8 +127,6 @@ const FoodMenu = () => {
         >
           We prepares and serves food and <br /> drinks to customers on the premises
         </motion.p>
-
-        {/* View Full Menu Button */}
         <motion.button
           className="bg-[#c09342] text-white px-6 py-3 rounded hover:bg-[#c09342] transition cursor-pointer"
           variants={fadeDown}

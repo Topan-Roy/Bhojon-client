@@ -102,7 +102,6 @@ const AddCategoryForm = () => {
     <div className="max-w-7xl text-[#000] mx-auto p-6 bg-white shadow rounded-md">
       <h2 className="text-2xl font-semibold mb-4">Add Category</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Side */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium">Category Name *</label>
@@ -142,8 +141,6 @@ const AddCategoryForm = () => {
             </div>
           </div>
         </div>
-
-        {/* Right Side */}
         <div className="space-y-4">
           <div className="flex items-center space-x-2 mt-2">
             <input type="checkbox" name="offer" checked={formData.offer} onChange={handleChange} />

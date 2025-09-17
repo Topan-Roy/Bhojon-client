@@ -5,13 +5,10 @@ import Swal from "sweetalert2";
 const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Pagination & search
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch orders
   const fetchOrders = async () => {
     setLoading(true);
     try {
@@ -33,7 +30,6 @@ const ManageOrder = () => {
     fetchOrders();
   }, []);
 
-  // Cancel order
   const handleCancel = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -58,8 +54,6 @@ const ManageOrder = () => {
       }
     }
   };
-
-  // Update status
   const handleUpdateStatus = async (id, status) => {
     try {
       const res = await axios.patch(
@@ -79,9 +73,6 @@ const ManageOrder = () => {
   };
 
   if (loading) return <p>Loading orders...</p>;
-
-  // Filter & search
-  // Filter & search safely
 const filteredOrders = orders.filter((order) => {
   const email = order.userEmail || "";
   const items = order.items || [];
@@ -92,8 +83,6 @@ const filteredOrders = orders.filter((order) => {
   );
 });
 
-
-  // Pagination logic
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -102,8 +91,6 @@ const filteredOrders = orders.filter((order) => {
   return (
     <div className="p-6 text-[#000] bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Manage Orders</h1>
-
-      {/* Search & page size */}
       <div className="flex justify-between mb-4">
         <input
           type="text"
@@ -151,7 +138,6 @@ const filteredOrders = orders.filter((order) => {
                   <td className="p-3">${order.total.toFixed(2)}</td>
                   <td className="p-3">{new Date(order.orderDate).toLocaleString()}</td>
                   <td className="p-3 flex items-center gap-2">
-                    {/* Complete */}
                     <button
                       onClick={() => handleUpdateStatus(order._id, "completed")}
                       disabled={order.status !== "pending"}
@@ -163,8 +149,6 @@ const filteredOrders = orders.filter((order) => {
                     >
                       {order.status === "completed" ? "Completed ✅" : "Complete"}
                     </button>
-
-                    {/* Reject */}
                     <button
                       onClick={() => handleUpdateStatus(order._id, "rejected")}
                       disabled={order.status !== "pending"}
@@ -176,8 +160,6 @@ const filteredOrders = orders.filter((order) => {
                     >
                       {order.status === "rejected" ? "Rejected ❌" : "Reject"}
                     </button>
-
-                    {/* Delete */}
                     <button
                       onClick={() => handleCancel(order._id)}
                       className="px-3 py-1 rounded-md bg-[#dc3545] hover:bg-[#dc3545] text-white shadow text-sm font-medium"
@@ -189,8 +171,6 @@ const filteredOrders = orders.filter((order) => {
               ))}
             </tbody>
           </table>
-
-          {/* Pagination */}
           <div className="flex justify-center mt-4 space-x-2">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

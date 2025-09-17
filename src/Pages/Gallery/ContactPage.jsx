@@ -23,7 +23,6 @@ const slideRight = {
 const ContactPage = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-12">
-      {/* Top Contact Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
         {[
           {
@@ -62,9 +61,8 @@ const ContactPage = () => {
         ))}
       </div>
 
-      {/* Main Content */}
+     
       <div className="grid md:grid-cols-2 gap-8 items-center">
-        {/* Left - Image */}
         <motion.div
           variants={slideLeft}
           initial="hidden"
@@ -78,8 +76,6 @@ const ContactPage = () => {
             className="w-full h-auto"
           />
         </motion.div>
-
-        {/* Right - Contact Form */}
         <motion.div
           variants={slideRight}
           initial="hidden"

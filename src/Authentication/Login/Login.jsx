@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, useLocation } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Contexts/Context";
@@ -7,24 +7,38 @@ import { AuthContext } from "../../Contexts/Context";
 const Login = () => {
   const { signIn, forgetPassword } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
+  const from = location.state?.from?.pathname || null;
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  // Login function
   const onSubmit = async (data) => {
     setLoading(true);
     try {
       const userCredential = await signIn(data.email, data.password);
+      const email = userCredential.user.email;
+
+      const res = await fetch(`http://localhost:3000/users/${email}`);
+      const userData = await res.json();
 
       Swal.fire({
         icon: "success",
         title: "Login Successful",
-        text: `Welcome back ${userCredential.user.email}`,
+        text: `Welcome back ${email}`,
       });
 
       reset();
-      navigate("/"); 
+      if (from) {
+        navigate(from, { replace: true });
+      }
+      else if (userData?.role === "admin") {
+        navigate("/dashboard", { replace: true });
+      }
+      else {
+        navigate("/", { replace: true });
+      }
+
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -37,7 +51,6 @@ const Login = () => {
     }
   };
 
-  // Forget password function
   const handleForgetPassword = async () => {
     const { value: email } = await Swal.fire({
       title: "Enter your email",
@@ -68,7 +81,6 @@ const Login = () => {
   return (
     <div className="min-h-screen mt-5 flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-md shadow-md w-full max-w-md border">
-        {/* Heading */}
         <h2 className="text-3xl font-semibold text-center text-[#c09342] mb-2">
           Login
         </h2>
@@ -76,9 +88,7 @@ const Login = () => {
           If you have shopped with us before, please enter your details in the boxes below.
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Email */}
           <div>
             <label className="block text-gray-700 mb-1">Email Address</label>
             <input
@@ -92,7 +102,6 @@ const Login = () => {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-gray-700 mb-1">Password</label>
             <input
@@ -108,7 +117,6 @@ const Login = () => {
             )}
           </div>
 
-          {/* Remember + Forgot */}
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center gap-2">
               <input type="checkbox" className="w-4 h-4" />
@@ -123,7 +131,6 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             disabled={loading}
@@ -132,10 +139,8 @@ const Login = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          {/* OR */}
           <div className="text-center text-gray-600">OR</div>
 
-          {/* Facebook Login */}
           <button
             type="button"
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
@@ -144,7 +149,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Register Link */}
         <p className="text-center text-gray-700 mt-6">
           Don't have an account?{" "}
           <NavLink to="/register" className="text-blue-600 hover:underline">

@@ -97,7 +97,6 @@ const ProductCard = () => {
 
   return (
     <div className="flex p-6 bg-[#f5f2ea] max-w-7xl mx-auto">
-      {/* Left side */}
       <div className="w-3/4 pr-4">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl text-[#000] font-semibold">Category Food</h1>
@@ -109,8 +108,6 @@ const ProductCard = () => {
             className="border px-3 py-1 text-[#000] rounded w-60 focus:outline-none"
           />
         </div>
-
-        {/* Categories */}
         <div className="flex text-[#000] space-x-4 overflow-x-auto mb-4">
           {["All Items", ...categories].map((cat, idx) => (
             <button
@@ -126,8 +123,6 @@ const ProductCard = () => {
             </button>
           ))}
         </div>
-
-        {/* Product grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredProducts.map((product) => {
             const quantity = quantities[product._id] || 0;
@@ -186,8 +181,6 @@ const ProductCard = () => {
           })}
         </div>
       </div>
-
-      {/* Right side - Cart */}
       <div className="w-1/4 bg-white text-[#000] p-4 rounded shadow h-fit">
         <h2 className="text-lg font-semibold mb-4">Cart</h2>
         {cart.length === 0 ? (
@@ -219,7 +212,6 @@ const ProductCard = () => {
           ))
         )}
 
-        {/* Summary */}
         <hr className="my-3" />
         <div className="text-sm space-y-1">
           <div className="flex justify-between">
@@ -247,8 +239,6 @@ const ProductCard = () => {
           🛒 Go to Checkout
         </button>
       </div>
-
-      {/* Modal */}
       {showModal && selectedProduct && (
         <div className="fixed inset-0 flex text-[#000] items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg w-96 p-6">

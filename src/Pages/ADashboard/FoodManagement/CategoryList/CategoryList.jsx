@@ -15,11 +15,8 @@ const CategoryList = () => {
     image: "",
   });
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [categoriesPerPage] = useState(10); 
-
-  // Fetch all categories
   const fetchCategories = async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/categories");
@@ -32,8 +29,6 @@ const CategoryList = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  // Handle input change
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
@@ -42,8 +37,6 @@ const CategoryList = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
-  // Start editing a category
   const handleEdit = (category) => {
     setEditingCategory(category._id);
     setFormData({
@@ -54,8 +47,6 @@ const CategoryList = () => {
       image: category.image,
     });
   };
-
-  // Cancel editing
   const handleCancel = () => {
     setEditingCategory(null);
     setFormData({
@@ -66,8 +57,6 @@ const CategoryList = () => {
       image: "",
     });
   };
-
-  // Update category
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (!formData.name.trim()) {
@@ -91,8 +80,6 @@ const CategoryList = () => {
       setLoading(false);
     }
   };
-
-  // Delete category
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -115,8 +102,6 @@ const CategoryList = () => {
       }
     }
   };
-
-  // Pagination logic
   const indexOfLastCategory = currentPage * categoriesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
   const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
@@ -204,13 +189,13 @@ const CategoryList = () => {
               <td className="border px-4 py-2 space-x-2">
                 <button
                   onClick={() => handleEdit(cat)}
-                  className="bg-[#20c997] text-white px-2 py-1 rounded"
+                  className="bg-[#20c997] text-white px-2 py-1 rounded cursor-pointer"
                 >
                   <FiEdit size={20} />
                 </button>
                 <button
                   onClick={() => handleDelete(cat._id)}
-                  className="bg-[#dc3545] text-white px-2 py-1 rounded"
+                  className="bg-[#dc3545] text-white px-2 py-1 rounded cursor-pointer"
                 >
                   <FiTrash2 size={20} />
                 </button>
@@ -219,8 +204,6 @@ const CategoryList = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Pagination */}
       <div className="flex justify-center mt-4 space-x-2">
         <button
           onClick={handlePrevPage}

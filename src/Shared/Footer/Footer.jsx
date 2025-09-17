@@ -4,15 +4,13 @@ const Footer = () => {
   return (
     <footer className="bg-[#112a2a] text-gray-300 pt-12 ">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* About */}
+      
         <div>
-          {/* <h3 className="text-white text-lg font-semibold mb-4">About Us</h3> */}
         <img src={logo} alt=""  />
           <p className="text-sm leading-6 ">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard.
           </p>
-          {/* Social Icons */}
           <div className="flex space-x-3 mt-5">
             <a
               href="https://facebook.com"
@@ -48,9 +46,6 @@ const Footer = () => {
             </a>
           </div>
         </div>
-         
-
-        {/* Get In Touch */}
         <div>
           <h3 className="text-white text-lg font-semibold mb-4">Get In Touch</h3>
           <ul className="space-y-2 text-sm">
@@ -64,8 +59,6 @@ const Footer = () => {
 
           </div>
         </div>
-
-        {/* Book A Table + Pages */}
         <div>
          
           <h3 className="text-white text-lg font-semibold mb-4">Pages</h3>
@@ -113,8 +106,6 @@ const Footer = () => {
            
           </ul>
         </div>
-
-        {/* Opening Hours */}
         <div>
           <h3 className="text-white text-lg font-semibold mb-4">Available On</h3>
           <ul className="space-y-2 text-sm">
@@ -129,7 +120,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Footer */}
       <div className="mt-10 border-t border-gray-700 py-4 text-center text-sm text-gray-400">
         © {new Date().getFullYear()} Bhojon Demo. All Rights Reserved.
       </div>

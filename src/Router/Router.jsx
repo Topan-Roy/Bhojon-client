@@ -27,6 +27,9 @@ import AddFoodForm from "../Pages/ADashboard/FoodManagement/AddFoodForm/AddFoodF
 import AdminFoodList from "../Pages/ADashboard/FoodManagement/AdminFoodList/AdminFoodList";
 import AddCategoryForm from "../Pages/ADashboard/FoodManagement/AddCategoryForm/AddCategoryForm";
 import CategoryList from "../Pages/ADashboard/FoodManagement/CategoryList/CategoryList";
+import ManageUsers from "../Pages/ADashboard/Users/ManageUsers/ManageUsers";
+import PrivateRoute from "../Routes/PrivateRoute";
+import AdminRoute from "../Routes/AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -67,7 +70,7 @@ export const router = createBrowserRouter([
       },
         {
         path:'checkoutpage',
-        Component: CheckoutPage
+        element:<PrivateRoute><CheckoutPage></CheckoutPage></PrivateRoute>
       },
 
     ]
@@ -90,7 +93,7 @@ export const router = createBrowserRouter([
   },
    {
     path: '/dashboard',
-    Component: AdminDashboard,
+    element:<PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
     children: [
       {
         path: 'dashboard',
@@ -98,35 +101,39 @@ export const router = createBrowserRouter([
       },
       {
         path:'manageorder',
-        Component: ManageOrder
+       element:<AdminRoute><ManageOrder></ManageOrder></AdminRoute>
       },
       {
         path:'completedbookings',
-        Component: CompletedBookings
+       element:<AdminRoute><CompletedBookings></CompletedBookings></AdminRoute>
       },
       {
         path:'pendingbookings',
-        Component: PendingBookings
+      element:<AdminRoute><PendingBookings></PendingBookings></AdminRoute>
       },
       {
         path:'rejectedbookings',
-        Component: RejectedBookings
+       element:<AdminRoute><RejectedBookings></RejectedBookings></AdminRoute>
       },
       {
         path:'addfoodform',
-        Component: AddFoodForm
+       element:<AdminRoute><AddFoodForm></AddFoodForm></AdminRoute>
       },
       {
         path:'adminfoodlist',
-        Component:AdminFoodList
+       element:<AdminRoute><AdminFoodList></AdminFoodList></AdminRoute>
       },
       {
         path:'addcategoryform',
-        Component:AddCategoryForm
+        element:<AdminRoute><AddCategoryForm></AddCategoryForm></AdminRoute>
       },
       {
         path:'categorylist',
-        Component:CategoryList
+        element:<AdminRoute><CategoryList></CategoryList></AdminRoute>
+      },
+      {
+        path:'manageusers',
+       element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
       
       

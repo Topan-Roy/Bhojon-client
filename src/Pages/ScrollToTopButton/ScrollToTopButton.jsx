@@ -4,8 +4,6 @@ import { FaArrowUp } from "react-icons/fa";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
-
-  // Show button after scrolling down
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
@@ -22,7 +20,7 @@ const ScrollToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // smooth scroll
+      behavior: "smooth", 
     });
   };
 

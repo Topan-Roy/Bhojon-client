@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Swal from "sweetalert2"; // ✅ SweetAlert import
+import Swal from "sweetalert2"; 
 
 const imgbbAPI = import.meta.env.VITE_IMGBB_KEY;
 
@@ -90,8 +90,6 @@ const AddFoodForm = () => {
 
       if (res.data.success) {
         Swal.fire("Success", "Food added successfully!", "success");
-
-        // Reset form
         setFormData({
           category: "",
           kitchen: "",
@@ -128,7 +126,6 @@ const AddFoodForm = () => {
     <div className="max-w-6xl mx-auto p-6 bg-white rounded shadow text-[#000]">
       <h2 className="text-2xl font-semibold mb-4">Add Food</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Side */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium">Category</label>
@@ -223,8 +220,6 @@ const AddFoodForm = () => {
             <div className="w-16 h-16 mt-2 bg-gray-200 flex items-center justify-center text-sm">60x60</div>
           </div>
         </div>
-
-        {/* Right Side */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium">VAT</label>

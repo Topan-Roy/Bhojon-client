@@ -12,7 +12,6 @@ import {
     FaFileAlt,
     FaCog,
     FaSignOutAlt,
-    FaEdit,
     FaBell,
 } from "react-icons/fa";
 import { AuthContext } from "../Contexts/Context";
@@ -26,7 +25,6 @@ const AdminDashboard = () => {
     const [stats, setStats] = useState(null);
     const [latestOrders, setLatestOrders] = useState([]);
     const [profile, setProfile] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
     const [openMenu, setOpenMenu] = useState(null);
 
     const location = useLocation();
@@ -58,7 +56,6 @@ const AdminDashboard = () => {
             .catch((err) => console.error(err));
     }, []);
 
-    // Fetch latest orders
     useEffect(() => {
         fetch("http://localhost:3000/api/admin/latest-orders")
             .then((res) => res.json())
@@ -70,7 +67,6 @@ const AdminDashboard = () => {
 
     const menuItems = [
         { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard" },
-
         {
             icon: <FaClipboardList />,
             text: "Manage Order",
@@ -81,10 +77,8 @@ const AdminDashboard = () => {
                 { text: "Reject Orders", path: "/dashboard/rejectedbookings" },
             ],
         },
-
         { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation" },
         { icon: <FaShoppingCart />, text: "Purchase Manage", path: "/dashboard/purchase" },
-
         {
             icon: <FaUtensils />,
             text: "Food Management",
@@ -95,34 +89,12 @@ const AdminDashboard = () => {
                 { text: "Category List", path: "/dashboard/categorylist" },
             ],
         },
-
-        { icon: <FaUsers />, text: "Human Resource", path: "/dashboard/users" },
+        { icon: <FaUsers />, text: "Human Resource", path: "/dashboard/manageusers" },
         { icon: <FaFileAlt />, text: "Report", path: "/dashboard/report" },
         { icon: <FaCog />, text: "Settings", path: "/dashboard/settings" },
     ];
 
-
     const isDashboardPage = location.pathname === "/dashboard";
-
-    const handleProfileChange = (e) => {
-        const { name, value } = e.target;
-        setProfile({ ...profile, [name]: value });
-    };
-
-    const handleProfileSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const { _id, ...updateData } = profile;
-            await axios.put(`http://localhost:3000/users/${_id}`, updateData);
-
-            setIsEditing(false);
-            fetchProfile();
-            alert("Profile updated successfully");
-        } catch (err) {
-            console.error(err);
-            alert("Failed to update profile");
-        }
-    };
 
     const handleLogout = async () => {
         try {
@@ -139,6 +111,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="flex">
+            {/* Overlay for mobile */}
             <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
@@ -150,10 +123,9 @@ const AdminDashboard = () => {
                 className={`fixed md:static top-0 left-0 h-full w-64 bg-gray-900 text-white transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
-                {/* Profile */}
                 <div className="p-6 text-center border-b border-gray-700">
                     <BhojonNext />
-                    {profile && !isEditing && (
+                    {profile && (
                         <>
                             <img
                                 src={profile.picture || "/default-admin.png"}
@@ -163,69 +135,11 @@ const AdminDashboard = () => {
                             <h2 className="text-2xl font-bold text-[#198754]">{profile.name}</h2>
                             <p className="mt-1">{role === "admin" ? "Admin" : "User"}</p>
                             <span className="text-[#198754] text-sm">● Active</span>
-                            <button
-                                onClick={() => setIsEditing(true)}
-                                className="mt-2 w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white"
-                            >
-                                <FaEdit /> Edit Profile
-                            </button>
                         </>
-                    )}
-
-                    {profile && isEditing && (
-                        <form onSubmit={handleProfileSubmit} className="space-y-2 text-left">
-                            <input
-                                type="text"
-                                name="name"
-                                value={profile.name}
-                                onChange={handleProfileChange}
-                                placeholder="Name"
-                                className="w-full px-2 py-1 rounded bg-gray-800 text-white"
-                            />
-                            <input
-                                type="text"
-                                name="phone"
-                                value={profile.phone}
-                                onChange={handleProfileChange}
-                                placeholder="Phone"
-                                className="w-full px-2 py-1 rounded bg-gray-800 text-white"
-                            />
-                            <input
-                                type="text"
-                                name="address"
-                                value={profile.address}
-                                onChange={handleProfileChange}
-                                placeholder="Address"
-                                className="w-full px-2 py-1 rounded bg-gray-800 text-white"
-                            />
-                            <input
-                                type="text"
-                                name="picture"
-                                value={profile.picture}
-                                onChange={handleProfileChange}
-                                placeholder="Picture URL"
-                                className="w-full px-2 py-1 rounded bg-gray-800 text-white"
-                            />
-                            <div className="flex justify-between mt-2">
-                                <button
-                                    type="submit"
-                                    className="flex items-center gap-2 bg-[#198754] px-3 py-1 rounded text-white"
-                                >
-                                    Save
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setIsEditing(false)}
-                                    className="flex items-center gap-2 bg-gray-500 px-3 py-1 rounded text-white"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
                     )}
                 </div>
 
-                {/* Menu */}
+                {/* Menu Items */}
                 <nav className="flex-1 p-4 space-y-2">
                     {menuItems.map((item, i) =>
                         item.children ? (
@@ -281,17 +195,13 @@ const AdminDashboard = () => {
 
             {/* Main Content */}
             <div className="flex-1 p-4 md:p-6">
-                {/* Top Navbar */}
                 <div className="flex items-center justify-between mb-6">
-                    {/* Left: menu + title */}
                     <div className="flex items-center gap-4">
                         <button onClick={toggleSidebar} className="md:hidden text-2xl text-white">
                             {isOpen ? <FaTimes /> : <FaBars />}
                         </button>
                         <h1 className="text-xl md:text-2xl font-bold text-white">Dashboard</h1>
                     </div>
-
-                    {/* Right: notification + logout */}
                     <div className="flex items-center gap-4">
                         <button className="relative text-white hover:text-yellow-400">
                             <FaBell className="w-6 h-6" />
@@ -326,7 +236,6 @@ const AdminDashboard = () => {
                             <h3 className="text-3xl font-bold">{stats.completedOrders}</h3>
                             <p className="text-sm mt-1">Completed Bookings</p>
                         </div>
-
                         <div className="p-5 rounded-xl shadow text-white bg-pink-500">
                             <h3 className="text-3xl font-bold">{stats.totalCustomers}</h3>
                             <p className="text-sm mt-1">Total Customers</p>

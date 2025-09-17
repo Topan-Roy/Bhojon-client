@@ -109,7 +109,6 @@ console.log("Booking user:", user);
     <div className="bg-[#f5f2ea] mt-10 text-[#000]">
        <CardPage></CardPage>
       <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        {/* Cart Products */}
         <table className="w-full mb-6 text-left border-b">
           <thead>
             <tr className="border-b">
@@ -149,10 +148,7 @@ console.log("Booking user:", user);
             ))}
           </tbody>
         </table>
-
-        {/* Main Section */}
         <div className="grid grid-cols-3 gap-6">
-          {/* Left Image */}
           <div className="rounded h-[516px] overflow-hidden flex items-center justify-center">
             {cart.length > 0 ? (
               <img src={cart[0].image} alt={cart[0].name} className="w-full h-full object-cover rounded" />
@@ -162,8 +158,6 @@ console.log("Booking user:", user);
               </div>
             )}
           </div>
-
-          {/* Middle - Shipping Info */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Shipping Method</h2>
             <div className="space-y-2 mb-4">
@@ -212,8 +206,6 @@ console.log("Booking user:", user);
               </div>
             </div>
           </div>
-
-          {/* Right - Cart Total */}
           <div className="bg-[#f5f2ea] p-6 rounded text-sm space-y-2 h-fit">
             <h2 className="text-lg font-semibold mb-4">Cart Total</h2>
             <div className="flex justify-between">

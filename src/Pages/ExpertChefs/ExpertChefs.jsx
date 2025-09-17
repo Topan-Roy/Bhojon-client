@@ -20,7 +20,6 @@ const chefs = [
   },
 ];
 
-// Variants
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
@@ -42,7 +41,7 @@ const scaleUp = {
 const ExpertChefs = () => {
   return (
     <section className="py-16 bg-white text-center">
-      {/* Header */}
+     
       <motion.p
         className="text-lg text-yellow-600 font-medium mb-2"
         variants={fadeUp}
@@ -65,7 +64,6 @@ const ExpertChefs = () => {
         OUR EXPERT CHEFS
       </motion.h2>
 
-      {/* Grid of Chefs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 max-w-7xl mx-auto">
         {chefs.map((chef, index) => (
           <motion.div

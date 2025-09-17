@@ -4,7 +4,6 @@ const ImageGallery = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Row 1 */}
         <div className="rounded-xl overflow-hidden h-[250px]">
           <img
             src="https://i.ibb.co/B5fpnYJn/G5.png"
@@ -19,8 +18,6 @@ const ImageGallery = () => {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Row 2 */}
         <div className="md:col-span-2 rounded-xl overflow-hidden h-[300px]">
           <img
             src="https://i.ibb.co/zhNKmtRz/G3.png"
@@ -28,8 +25,6 @@ const ImageGallery = () => {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Row 3 */}
         <div className="rounded-xl overflow-hidden h-[250px]">
           <img
             src="https://i.ibb.co/zhxTc3XJ/G2.png"
@@ -44,8 +39,6 @@ const ImageGallery = () => {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Row 4 */}
         <div className="md:col-span-2 rounded-xl overflow-hidden h-[300px]">
           <img
             src="https://i.ibb.co/Dff76SCd/G.png"

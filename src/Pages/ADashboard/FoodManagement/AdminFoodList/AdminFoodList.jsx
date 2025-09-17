@@ -6,13 +6,10 @@ import { FiEdit, FiTrash2 } from "react-icons/fi";
 const AdminFoodList = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // Pagination & search state
   const [currentPage, setCurrentPage] = useState(1);
   const [foodsPerPage, setFoodsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch all food products
   const fetchFoods = async () => {
     setLoading(true);
     try {
@@ -30,7 +27,7 @@ const AdminFoodList = () => {
     fetchFoods();
   }, []);
 
-  // Delete food
+  
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -56,7 +53,6 @@ const AdminFoodList = () => {
     });
   };
 
-  // Update food
   const handleUpdate = async (food) => {
     const { value: formValues } = await Swal.fire({
       title: "Update Food",
@@ -89,14 +85,11 @@ const AdminFoodList = () => {
     }
   };
 
-  // Filtered & searched foods
   const filteredFoods = foods.filter(
     (food) =>
       food.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       food.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  // Pagination logic
   const indexOfLastFood = currentPage * foodsPerPage;
   const indexOfFirstFood = indexOfLastFood - foodsPerPage;
   const currentFoods = filteredFoods.slice(indexOfFirstFood, indexOfLastFood);
@@ -112,8 +105,6 @@ const AdminFoodList = () => {
   return (
     <div className="max-w-7xl text-[#000] mx-auto p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-semibold mb-4">Admin Food List</h2>
-
-      {/* Search & Page Size */}
       <div className="flex justify-between mb-4">
         <input
           type="text"
@@ -161,13 +152,13 @@ const AdminFoodList = () => {
                   <td className="border px-4 py-2 space-x-2">
                     <button
                       onClick={() => handleUpdate(food)}
-                      className="bg-[#20c997] text-white px-2 py-1 rounded"
+                      className="bg-[#20c997] text-white px-2 py-1 rounded cursor-pointer"
                     >
                       <FiEdit size={20} />
                     </button>
                     <button
                       onClick={() => handleDelete(food._id)}
-                      className="bg-[#dc3545] text-white px-2 py-1 rounded"
+                      className="bg-[#dc3545] text-white px-2 py-1 rounded cursor-pointer"
                     >
                       <FiTrash2 size={20} />
                     </button>
@@ -176,8 +167,6 @@ const AdminFoodList = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Pagination */}
           <div className="flex justify-center mt-4 space-x-2">
             <button
               onClick={handlePrevPage}

@@ -4,14 +4,11 @@ import axios from "axios";
 const CompletedBookings = () => {
   const [completedOrders, setCompletedOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Fetch completed orders
   const fetchCompletedOrders = async () => {
     setLoading(true);
     try {
       const res = await axios.get("http://localhost:3000/api/admin/bookings");
       if (res.data.success) {
-        // শুধু completed order ফিল্টার
         const filtered = res.data.bookings.filter(
           (order) => order.status === "completed"
         );

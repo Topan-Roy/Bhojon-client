@@ -4,12 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import ImageGallery from "./ImageGallery";
 import ScrollToTopButton from "../ScrollToTopButton/ScrollToTopButton";
-
-
-
-
 const  Gallery = () => {
- 
   return (
     <div className=" bg-white mt-10">
       {/* Header */}

@@ -16,7 +16,6 @@ const Register = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      // 1️⃣ Picture Upload to imgbb
       const formData = new FormData();
       formData.append("image", data.picture[0]);
       const imgRes = await axios.post(
@@ -24,11 +23,7 @@ const Register = () => {
         formData
       );
       const imgURL = imgRes.data.data.url;
-
-      // 2️⃣ Firebase User Creation
       const userCredential = await createUser(data.email, data.password);
-
-      // 3️⃣ Save user data to your server
       const userData = {
         name: data.name,
         email: data.email,
@@ -39,8 +34,6 @@ const Register = () => {
       };
 
       await axios.post("http://localhost:3000/api/register", userData);
-
-      // 4️⃣ SweetAlert success
       Swal.fire({
         icon: "success",
         title: "Registered Successfully",

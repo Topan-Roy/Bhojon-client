@@ -25,7 +25,6 @@ const LuxuryRestaurant = () => {
     },
   ];
 
-  // Animation from top to bottom
   const fadeDown = {
     hidden: { opacity: 0, y: -50 },
     visible: (i) => ({
@@ -38,8 +37,6 @@ const LuxuryRestaurant = () => {
   return (
     <section className="text-center bg-white w-full px-4 py-16 md:py-24 mt-35 md:mt-0">
       <div className="max-w-6xl mx-auto">
-
-        {/* Motion Header */}
         <motion.h5
           className="text-[#c09342] text-lg mb-2 tracking-wide"
           variants={fadeDown}
@@ -76,7 +73,6 @@ const LuxuryRestaurant = () => {
           Marfa eiusmod Pinterest in do umami readymade swag.
         </motion.p>
 
-        {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           {features.map((feature, index) => (
             <motion.div
@@ -86,7 +82,7 @@ const LuxuryRestaurant = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              custom={index + 3} // stagger after header/paragraph
+              custom={index + 3} 
             >
               <div className="flex justify-center mb-4">
                 <img
@@ -103,14 +99,13 @@ const LuxuryRestaurant = () => {
           ))}
         </div>
 
-        {/* Buttons */}
         <motion.div
           className="flex justify-center gap-4"
           variants={fadeDown}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          custom={7} // after features
+          custom={7} 
         >
           <button className="bg-[#c09342] text-white px-6 py-3 rounded hover:bg-[#c09342] transition duration-200 cursor-pointer">
            <a href="/reservation" className="">

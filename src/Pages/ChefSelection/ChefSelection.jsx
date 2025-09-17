@@ -71,7 +71,6 @@ const menu = {
   ],
 };
 
-// Animation Variants
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
@@ -93,7 +92,6 @@ const scaleUp = {
 const ChefSelection = () => {
   return (
     <section className="bg-[#0f2220] text-white py-20 px-4">
-      {/* Title */}
       <motion.div
         className="text-center mb-12"
         initial="hidden"
@@ -116,7 +114,6 @@ const ChefSelection = () => {
         </motion.h2>
       </motion.div>
 
-      {/* Menu Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {Object.entries(menu).map(([category, items], index) => (
           <motion.div

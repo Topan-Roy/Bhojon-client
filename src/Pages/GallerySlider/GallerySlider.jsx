@@ -1,4 +1,4 @@
-// components/GallerySlider.jsx
+
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -15,7 +15,7 @@ const images = [
   "https://i.ibb.co.com/zW5Z0Cxj/res2.jpg",
 ];
 
-// Animation Variants
+
 const fadeDown = {
   hidden: { opacity: 0, y: -50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -33,7 +33,6 @@ const fadeUp = {
 const GallerySlider = () => {
   return (
     <div className="bg-[#0c221c] py-16">
-      {/* Header */}
       <motion.div
         className="text-center mb-12"
         initial="hidden"
@@ -46,8 +45,6 @@ const GallerySlider = () => {
           Restaurant Photo Gallery
         </h2>
       </motion.div>
-
-      {/* Slider */}
       <Swiper
         slidesPerView={1}
         spaceBetween={30}

@@ -1,8 +1,6 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-// Animation Variants
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: (i = 1) => ({
@@ -34,7 +32,6 @@ const WhyChooseUs = () => {
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        {/* Left Side - Images */}
         <motion.div
           className="grid grid-cols-2 gap-4"
           variants={fadeRight}
@@ -70,8 +67,6 @@ const WhyChooseUs = () => {
             />
           </motion.div>
         </motion.div>
-
-        {/* Right Side - Text Content */}
         <motion.div
           className="text-left"
           variants={fadeLeft}
@@ -128,8 +123,6 @@ const WhyChooseUs = () => {
               </motion.li>
             ))}
           </motion.ul>
-
-          {/* Buttons */}
           <motion.div
             className="flex gap-4"
             variants={fadeUp}

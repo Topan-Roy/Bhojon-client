@@ -25,8 +25,6 @@ const Reservation = () => {
     console.log(form);
     alert("Reservation submitted!");
   };
-
-  // Animation Variants
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     visible: (i = 1) => ({
@@ -38,12 +36,7 @@ const Reservation = () => {
 
   return (
     <div className="min-h-screen bg-white ">
-      {/* Header */}
-      
-
-      {/* Main Section */}
       <div className="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-10 items-center">
-        {/* Image */}
         <motion.div
           className="flex justify-center"
           initial={{ opacity: 0, x: -80 }}
@@ -58,7 +51,6 @@ const Reservation = () => {
           />
         </motion.div>
 
-        {/* Form */}
         <motion.form
           onSubmit={handleSubmit}
           className="space-y-5 max-w-md w-full mx-auto"
@@ -77,8 +69,6 @@ const Reservation = () => {
           >
             BOOK YOUR TABLE
           </motion.h2>
-
-          {/* Total Person */}
           <motion.div variants={fadeUp} custom={3} className="relative">
             <AiOutlineUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
             <input
@@ -92,7 +82,6 @@ const Reservation = () => {
             />
           </motion.div>
 
-          {/* Date */}
           <motion.div variants={fadeUp} custom={4} className="relative">
             <AiOutlineCalendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
             <input
@@ -104,8 +93,6 @@ const Reservation = () => {
               required
             />
           </motion.div>
-
-          {/* Time */}
           <motion.div variants={fadeUp} custom={5} className="relative">
             <AiOutlineClockCircle className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
             <input
@@ -117,8 +104,6 @@ const Reservation = () => {
               required
             />
           </motion.div>
-
-          {/* Contact */}
           <motion.div variants={fadeUp} custom={6} className="relative">
             <AiOutlinePhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl" />
             <input
@@ -131,8 +116,6 @@ const Reservation = () => {
               required
             />
           </motion.div>
-
-          {/* Button */}
           <motion.button
             variants={fadeUp}
             custom={7}
