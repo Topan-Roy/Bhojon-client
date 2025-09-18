@@ -78,7 +78,16 @@ const AdminDashboard = () => {
             ],
         },
         { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation" },
-        { icon: <FaShoppingCart />, text: "Purchase Manage", path: "/dashboard/purchase" },
+        {
+            icon: <FaShoppingCart />,
+            text: "Purchase Manage",
+            children: [
+                { text: "Add purchase", path: "/dashboard/purchaseform" },
+                { text: "Item Purchase", path: "/dashboard/itempurchase" },
+                { text: "Purchase Return", path: "/dashboard/purchasereturnlist" },
+                
+            ],
+        },
         {
             icon: <FaUtensils />,
             text: "Food Management",
@@ -111,20 +120,21 @@ const AdminDashboard = () => {
 
     return (
         <div className="flex">
-            {/* Overlay for mobile */}
+           
             <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
                 onClick={() => setIsOpen(false)}
             ></div>
-
-            {/* Sidebar */}
             <aside
                 className={`fixed md:static top-0 left-0 h-full w-64 bg-gray-900 text-white transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
-                <div className="p-6 text-center border-b border-gray-700">
+                <div className=" px-20">
                     <BhojonNext />
+                </div>
+                <div className="p-6 text-center border-b border-gray-700">
+                    
                     {profile && (
                         <>
                             <img
@@ -139,8 +149,7 @@ const AdminDashboard = () => {
                     )}
                 </div>
 
-                {/* Menu Items */}
-                <nav className="flex-1 p-4 space-y-2">
+                <nav className="flex-1 p-1 space-y-2">
                     {menuItems.map((item, i) =>
                         item.children ? (
                             <div key={i}>
@@ -192,8 +201,6 @@ const AdminDashboard = () => {
                     )}
                 </nav>
             </aside>
-
-            {/* Main Content */}
             <div className="flex-1 p-4 md:p-6">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-4">
@@ -220,8 +227,6 @@ const AdminDashboard = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* Stats */}
                 {isDashboardPage && stats && (
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                         <div className="p-5 rounded-xl shadow text-white bg-indigo-500">
@@ -243,7 +248,6 @@ const AdminDashboard = () => {
                     </div>
                 )}
 
-                {/* Latest Orders */}
                 {isDashboardPage && latestOrders.length > 0 && (
                     <div className="bg-white text-[#000] p-5 rounded-xl shadow mb-6">
                         <h2 className="text-lg font-semibold mb-4">Latest Orders</h2>

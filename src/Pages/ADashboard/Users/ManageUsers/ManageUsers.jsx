@@ -138,16 +138,16 @@ const ManageUsers = () => {
                   {u.role === "admin" ? (
                     <button
                       onClick={() => handleRoleChange(u._id, "user")}
-                      className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+                      className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded cursor-pointer"
                     >
-                      <FiUserX size={16} /> User
+                      <FiUserX size={16} />  Admin
                     </button>
                   ) : (
                     <button
                       onClick={() => handleRoleChange(u._id, "admin")}
-                      className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded cursor-pointer"
+                     className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
                     >
-                      <FiUserCheck size={16} /> Admin
+                      <FiUserCheck size={16} />User
                     </button>
                   )}
                   <button

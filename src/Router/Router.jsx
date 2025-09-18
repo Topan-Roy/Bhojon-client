@@ -30,6 +30,9 @@ import CategoryList from "../Pages/ADashboard/FoodManagement/CategoryList/Catego
 import ManageUsers from "../Pages/ADashboard/Users/ManageUsers/ManageUsers";
 import PrivateRoute from "../Routes/PrivateRoute";
 import AdminRoute from "../Routes/AdminRoute";
+import PurchaseForm from "../Pages/ADashboard/PurchaseManage/PurchaseForm/PurchaseForm";
+import ItemPurchase from "../Pages/ADashboard/PurchaseManage/ItemPurchase/ItemPurchase";
+import PurchaseReturnList from "../Pages/ADashboard/PurchaseManage/PurchaseReturnList/PurchaseReturnList";
 
 export const router = createBrowserRouter([
   {
@@ -135,7 +138,18 @@ export const router = createBrowserRouter([
         path:'manageusers',
        element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
-      
+      {
+        path:'purchaseform',
+        Component:PurchaseForm
+      },
+      {
+        path:'itempurchase',
+        Component:ItemPurchase
+      },
+      {
+        path:'purchasereturnlist',
+        Component:PurchaseReturnList
+      }
       
 
     ]
