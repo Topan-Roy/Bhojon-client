@@ -37,48 +37,48 @@ import PurchaseReturnList from "../Pages/ADashboard/PurchaseManage/PurchaseRetur
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:RootLayout,
-    children:[
-        {
-            index:true,
-            Component:Home
-        },
-        {
-          path:'aboutus',
-          Component:AboutUs
-        },
-        {
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home
+      },
+      {
+        path: 'aboutus',
+        Component: AboutUs
+      },
+      {
         path: 'reservation',
         Component: ReservationRes
       },
-        {
-        path:'manu',
+      {
+        path: 'manu',
         Component: ManuMAnu
       },
-        {
-        path:'contactus',
+      {
+        path: 'contactus',
         Component: ContactUs
       },
-        {
-        path:'team',
+      {
+        path: 'team',
         Component: Team
       },
-        {
-        path:'gallery',
+      {
+        path: 'gallery',
         Component: Gallery
       },
-        {
-        path:'onlineorder',
+      {
+        path: 'onlineorder',
         Component: OnlineOrder
       },
-        {
-        path:'checkoutpage',
-        element:<PrivateRoute><CheckoutPage></CheckoutPage></PrivateRoute>
+      {
+        path: 'checkoutpage',
+        element: <PrivateRoute><CheckoutPage></CheckoutPage></PrivateRoute>
       },
 
     ]
   },
-   {
+  {
     path: '/',
     Component: AuthLayout,
     children: [
@@ -90,72 +90,72 @@ export const router = createBrowserRouter([
         path: 'register',
         Component: Register
       },
-      
+
 
     ]
   },
-   {
+  {
     path: '/dashboard',
-    element:<PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
+    element: <PrivateRoute><AdminRoute allowedRoles={["admin","order-manager","food-manager","Purchase-manager"]}> <AdminDashboard ></AdminDashboard></AdminRoute></PrivateRoute>,
     children: [
       {
         path: 'dashboard',
         Component: Dashboard
       },
       {
-        path:'manageorder',
-       element:<AdminRoute><ManageOrder></ManageOrder></AdminRoute>
+        path: 'manageorder',
+        element: <AdminRoute allowedRoles={["admin", "order-manager"]}><ManageOrder></ManageOrder></AdminRoute>
       },
       {
-        path:'completedbookings',
-       element:<AdminRoute><CompletedBookings></CompletedBookings></AdminRoute>
+        path: 'completedbookings',
+        element: <AdminRoute allowedRoles={["admin", "order-manager"]}><CompletedBookings></CompletedBookings></AdminRoute>
       },
       {
-        path:'pendingbookings',
-      element:<AdminRoute><PendingBookings></PendingBookings></AdminRoute>
+        path: 'pendingbookings',
+        element: <AdminRoute allowedRoles={["admin", "order-manager"]}><PendingBookings></PendingBookings></AdminRoute>
       },
       {
-        path:'rejectedbookings',
-       element:<AdminRoute><RejectedBookings></RejectedBookings></AdminRoute>
+        path: 'rejectedbookings',
+        element: <AdminRoute allowedRoles={["admin", "order-manager"]}><RejectedBookings></RejectedBookings></AdminRoute>
       },
       {
-        path:'addfoodform',
-       element:<AdminRoute><AddFoodForm></AddFoodForm></AdminRoute>
+        path: 'addfoodform',
+        element: <AdminRoute allowedRoles={["admin", "food-manager"]}><AddFoodForm></AddFoodForm></AdminRoute>
       },
       {
-        path:'adminfoodlist',
-       element:<AdminRoute><AdminFoodList></AdminFoodList></AdminRoute>
+        path: 'adminfoodlist',
+        element: <AdminRoute allowedRoles={["admin", "food-manager"]}><AdminFoodList></AdminFoodList></AdminRoute>
       },
       {
-        path:'addcategoryform',
-        element:<AdminRoute><AddCategoryForm></AddCategoryForm></AdminRoute>
+        path: 'addcategoryform',
+        element: <AdminRoute allowedRoles={["admin", "food-manager"]}><AddCategoryForm></AddCategoryForm></AdminRoute>
       },
       {
-        path:'categorylist',
-        element:<AdminRoute><CategoryList></CategoryList></AdminRoute>
+        path: 'categorylist',
+        element: <AdminRoute allowedRoles={["admin", "food-manager"]}><CategoryList></CategoryList></AdminRoute>
       },
       {
-        path:'manageusers',
-       element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        path: 'manageusers',
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
       {
-        path:'purchaseform',
-        Component:PurchaseForm
+        path: 'purchaseform',
+        element: <AdminRoute allowedRoles={["admin", "Purchase-manager"]}><PurchaseForm></PurchaseForm></AdminRoute>
       },
       {
-        path:'itempurchase',
-        Component:ItemPurchase
+        path: 'itempurchase',
+        element: <AdminRoute allowedRoles={["admin", "Purchase-manager"]}><ItemPurchase></ItemPurchase></AdminRoute>
       },
       {
-        path:'purchasereturnlist',
-        Component:PurchaseReturnList
+        path: 'purchasereturnlist',
+        element: <AdminRoute allowedRoles={["admin", "Purchase-manager"]}><PurchaseReturnList></PurchaseReturnList></AdminRoute>
       }
-      
+
 
     ]
   },
-   {
-     path: "/*",
-    Component:NotFoundPage
+  {
+    path: "/*",
+    Component: NotFoundPage
   }
 ]);

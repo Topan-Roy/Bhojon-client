@@ -17,7 +17,6 @@ import {
 import { AuthContext } from "../Contexts/Context";
 import axios from "axios";
 import BhojonNext from "../Shared/BhojonNext/BhojonNext";
-
 const AdminDashboard = () => {
     const { user, logoutUser } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
@@ -30,23 +29,17 @@ const AdminDashboard = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const toggleSidebar = () => setIsOpen(!isOpen);
-
-    const fetchProfile = async () => {
-        if (user?.email) {
-            try {
-                const res = await axios.get(`http://localhost:3000/users/${user.email}`);
-                setProfile(res.data);
-                setRole(res.data.role);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    };
-
     useEffect(() => {
-        fetchProfile();
+        if (user?.email) {
+            axios
+                .get(`http://localhost:3000/users/${user.email}`)
+                .then((res) => {
+                    setProfile(res.data);
+                    setRole(res.data.role);
+                })
+                .catch((err) => console.error(err));
+        }
     }, [user]);
-
     useEffect(() => {
         fetch("http://localhost:3000/api/admin/stats")
             .then((res) => res.json())
@@ -55,7 +48,6 @@ const AdminDashboard = () => {
             })
             .catch((err) => console.error(err));
     }, []);
-
     useEffect(() => {
         fetch("http://localhost:3000/api/admin/latest-orders")
             .then((res) => res.json())
@@ -64,44 +56,51 @@ const AdminDashboard = () => {
             })
             .catch((err) => console.error(err));
     }, []);
-
     const menuItems = [
-        { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard" },
+        { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard", roles: ["admin", "order-manager", "food-manager"] },
+
         {
             icon: <FaClipboardList />,
             text: "Manage Order",
+            roles: ["admin", "order-manager"],
             children: [
-                { text: "All Orders", path: "/dashboard/manageorder" },
-                { text: "Completed Orders", path: "/dashboard/completedbookings" },
-                { text: "Pending Orders", path: "/dashboard/pendingbookings" },
-                { text: "Reject Orders", path: "/dashboard/rejectedbookings" },
+                { text: "All Orders", path: "/dashboard/manageorder", roles: ["admin", "order-manager"] },
+                { text: "Completed Orders", path: "/dashboard/completedbookings", roles: ["admin", "order-manager"] },
+                { text: "Pending Orders", path: "/dashboard/pendingbookings", roles: ["admin", "order-manager"] },
+                { text: "Rejected Orders", path: "/dashboard/rejectedbookings", roles: ["admin", "order-manager"] },
             ],
         },
-        { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation" },
+
+        { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation", roles: ["admin"] },
+
         {
             icon: <FaShoppingCart />,
             text: "Purchase Manage",
+            roles: ["admin", "Purchase-manager"],
             children: [
-                { text: "Add purchase", path: "/dashboard/purchaseform" },
-                { text: "Item Purchase", path: "/dashboard/itempurchase" },
-                { text: "Purchase Return", path: "/dashboard/purchasereturnlist" },
-                
+                { text: "Add Purchase", path: "/dashboard/purchaseform", roles: ["admin", "Purchase-manager"] },
+                { text: "Item Purchase", path: "/dashboard/itempurchase", roles: ["admin", "Purchase-manager"] },
+                { text: "Purchase Return", path: "/dashboard/purchasereturnlist", roles: ["admin", "Purchase-manager"] },
             ],
         },
+
         {
             icon: <FaUtensils />,
             text: "Food Management",
+            roles: ["admin", "food-manager"],
             children: [
-                { text: "Add Food", path: "/dashboard/addfoodform" },
-                { text: "Food List", path: "/dashboard/adminfoodlist" },
-                { text: "Add Category", path: "/dashboard/addcategoryform" },
-                { text: "Category List", path: "/dashboard/categorylist" },
+                { text: "Add Food", path: "/dashboard/addfoodform", roles: ["admin", "food-manager"] },
+                { text: "Food List", path: "/dashboard/adminfoodlist", roles: ["admin", "food-manager"] },
+                { text: "Add Category", path: "/dashboard/addcategoryform", roles: ["admin", "food-manager"] },
+                { text: "Category List", path: "/dashboard/categorylist", roles: ["admin", "food-manager"] },
             ],
         },
-        { icon: <FaUsers />, text: "Human Resource", path: "/dashboard/manageusers" },
-        { icon: <FaFileAlt />, text: "Report", path: "/dashboard/report" },
-        { icon: <FaCog />, text: "Settings", path: "/dashboard/settings" },
+
+        { icon: <FaUsers />, text: "Human Resource", path: "/dashboard/manageusers", roles: ["admin"] },
+        { icon: <FaFileAlt />, text: "Report", path: "/dashboard/report", roles: ["admin"] },
+        { icon: <FaCog />, text: "Settings", path: "/dashboard/settings", roles: ["admin"] },
     ];
+
 
     const isDashboardPage = location.pathname === "/dashboard";
 
@@ -114,13 +113,10 @@ const AdminDashboard = () => {
         }
     };
 
-    const toggleMenu = (i) => {
-        setOpenMenu(openMenu === i ? null : i);
-    };
+    const toggleMenu = (i) => setOpenMenu(openMenu === i ? null : i);
 
     return (
         <div className="flex">
-           
             <div
                 className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity md:hidden ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
@@ -130,11 +126,10 @@ const AdminDashboard = () => {
                 className={`fixed md:static top-0 left-0 h-full w-64 bg-gray-900 text-white transform transition-transform duration-300 z-50 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
-                <div className=" px-20">
+                <div className="px-20">
                     <BhojonNext />
                 </div>
                 <div className="p-6 text-center border-b border-gray-700">
-                    
                     {profile && (
                         <>
                             <img
@@ -143,15 +138,15 @@ const AdminDashboard = () => {
                                 className="w-20 h-20 rounded-full mx-auto mb-2 object-cover"
                             />
                             <h2 className="text-2xl font-bold text-[#198754]">{profile.name}</h2>
-                            <p className="mt-1">{role === "admin" ? "Admin" : "User"}</p>
+                            <p className="mt-1">{role}</p>
                             <span className="text-[#198754] text-sm">● Active</span>
                         </>
                     )}
                 </div>
-
                 <nav className="flex-1 p-1 space-y-2">
-                    {menuItems.map((item, i) =>
-                        item.children ? (
+                    {menuItems.map((item, i) => {
+                        if (!item.roles.includes(role)) return null;
+                        return item.children ? (
                             <div key={i}>
                                 <button
                                     onClick={() => toggleMenu(i)}
@@ -163,24 +158,22 @@ const AdminDashboard = () => {
                                     </span>
                                     <span>{openMenu === i ? "▲" : "▼"}</span>
                                 </button>
-                                {openMenu === i && (
-                                    <div className="ml-8 mt-1 space-y-1">
-                                        {item.children.map((sub, j) => (
+                                {openMenu === i &&
+                                    item.children.map((sub, j) => {
+                                        if (!sub.roles.includes(role)) return null;
+                                        return (
                                             <NavLink
                                                 key={j}
                                                 to={sub.path}
                                                 className={({ isActive }) =>
-                                                    `block p-2 rounded-md transition ${isActive
-                                                        ? "bg-green-600 text-white"
-                                                        : "hover:bg-gray-700"
+                                                    `block p-2 rounded-md transition ${isActive ? "bg-green-600 text-white" : "hover:bg-gray-700"
                                                     }`
                                                 }
                                             >
                                                 {sub.text}
                                             </NavLink>
-                                        ))}
-                                    </div>
-                                )}
+                                        );
+                                    })}
                             </div>
                         ) : (
                             <NavLink
@@ -188,17 +181,15 @@ const AdminDashboard = () => {
                                 to={item.path}
                                 end={item.path === "/dashboard"}
                                 className={({ isActive }) =>
-                                    `flex items-center gap-3 p-3 rounded-lg transition ${isActive
-                                        ? "bg-green-600 text-white"
-                                        : "hover:bg-gray-700"
+                                    `flex items-center gap-3 p-3 rounded-lg transition ${isActive ? "bg-green-600 text-white" : "hover:bg-gray-700"
                                     }`
                                 }
                             >
                                 <span className="text-lg">{item.icon}</span>
                                 <span>{item.text}</span>
                             </NavLink>
-                        )
-                    )}
+                        );
+                    })}
                 </nav>
             </aside>
             <div className="flex-1 p-4 md:p-6">
@@ -212,9 +203,7 @@ const AdminDashboard = () => {
                     <div className="flex items-center gap-4">
                         <button className="relative text-white hover:text-yellow-400">
                             <FaBell className="w-6 h-6" />
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-xs text-white px-1 rounded-full">
-                                3
-                            </span>
+                            <span className="absolute -top-1 -right-1 bg-red-500 text-xs text-white px-1 rounded-full">3</span>
                         </button>
                         <button
                             onClick={handleLogout}
@@ -247,7 +236,6 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                 )}
-
                 {isDashboardPage && latestOrders.length > 0 && (
                     <div className="bg-white text-[#000] p-5 rounded-xl shadow mb-6">
                         <h2 className="text-lg font-semibold mb-4">Latest Orders</h2>
@@ -265,9 +253,7 @@ const AdminDashboard = () => {
                                         <tr key={i} className="border-t hover:bg-gray-50">
                                             <td className="p-3">{order.userEmail || order.name}</td>
                                             <td className="p-3 text-green-600">{order._id}</td>
-                                            <td className="p-3">
-                                                {new Date(order.createdAt).toLocaleTimeString()}
-                                            </td>
+                                            <td className="p-3">{new Date(order.createdAt).toLocaleTimeString()}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -283,3 +269,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
