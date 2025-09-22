@@ -34,6 +34,9 @@ import PurchaseForm from "../Pages/ADashboard/PurchaseManage/PurchaseForm/Purcha
 import ItemPurchase from "../Pages/ADashboard/PurchaseManage/ItemPurchase/ItemPurchase";
 import PurchaseReturnList from "../Pages/ADashboard/PurchaseManage/PurchaseReturnList/PurchaseReturnList";
 
+import ReservationForm from "../Pages/ADashboard/Reservation/ReservationForm";
+import ReservationTable from "../Pages/ADashboard/Reservation/ReservationTable";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -149,7 +152,15 @@ export const router = createBrowserRouter([
       {
         path: 'purchasereturnlist',
         element: <AdminRoute allowedRoles={["admin", "Purchase-manager"]}><PurchaseReturnList></PurchaseReturnList></AdminRoute>
-      }
+      },
+      {
+        path: 'reservation',
+        element: <AdminRoute allowedRoles={["admin"]}><ReservationForm></ReservationForm></AdminRoute>
+      },
+      {
+        path: 'reservationtable',
+        element: <AdminRoute allowedRoles={["admin"]}><ReservationTable></ReservationTable></AdminRoute>
+      },
 
 
     ]

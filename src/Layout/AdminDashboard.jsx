@@ -57,7 +57,7 @@ const AdminDashboard = () => {
             .catch((err) => console.error(err));
     }, []);
     const menuItems = [
-        { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard", roles: ["admin", "order-manager", "food-manager"] },
+        { icon: <FaTachometerAlt />, text: "Dashboard", path: "/dashboard", roles: ["admin", "order-manager", "food-manager","Purchase-manager"] },
 
         {
             icon: <FaClipboardList />,
@@ -71,8 +71,16 @@ const AdminDashboard = () => {
             ],
         },
 
-        { icon: <FaCalendarAlt />, text: "Reservation", path: "/dashboard/reservation", roles: ["admin"] },
-
+        {
+            icon: <FaCalendarAlt />,
+            text: "Reservatione",
+            roles: ["admin"],
+            children: [
+                { text: "Reservation", path: "/dashboard/reservationtable", roles: ["admin"] },
+                { text: "Add Booking", path: "/dashboard/reservation", roles: ["admin"] },   
+                
+            ],
+        },
         {
             icon: <FaShoppingCart />,
             text: "Purchase Manage",
