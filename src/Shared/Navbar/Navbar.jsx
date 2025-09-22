@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/users/${user.email}`)
+        .get(`https://bhojon-server.vercel.app/users/${user.email}`)
         .then((res) => setRole(res.data.role))
         .catch((err) => console.error(err));
     }

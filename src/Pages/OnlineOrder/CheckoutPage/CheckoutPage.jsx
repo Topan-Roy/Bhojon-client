@@ -75,7 +75,7 @@ const CheckoutPage = () => {
          userEmail: user?.email || "Guest",
       };
 console.log("Booking user:", user);
-      const response = await axios.post("http://localhost:3000/api/bookings", bookingData);
+      const response = await axios.post("https://bhojon-server.vercel.app/api/bookings", bookingData);
 
       if (response.data.success) {
         Swal.fire({

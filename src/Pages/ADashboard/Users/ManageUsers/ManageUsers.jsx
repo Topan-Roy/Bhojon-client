@@ -8,7 +8,7 @@ const ManageUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/admin/users");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/admin/users");
       if (res.data.success) {
         setUsers(res.data.users);
       }
@@ -25,7 +25,7 @@ const ManageUsers = () => {
   const handleRoleChange = async (id, role) => {
     try {
       const res = await axios.patch(
-        `http://localhost:3000/api/admin/users/${id}/role`,
+        `https://bhojon-server.vercel.app/api/admin/users/${id}/role`,
         { role }
       );
       if (res.data.success) {
@@ -64,7 +64,7 @@ const ManageUsers = () => {
     if (formValues) {
       try {
         const res = await axios.put(
-          `http://localhost:3000/api/admin/users/${user._id}`,
+          `https://bhojon-server.vercel.app/api/admin/users/${user._id}`,
           formValues
         );
         if (res.data.success) {
@@ -90,7 +90,7 @@ const ManageUsers = () => {
     if (confirm.isConfirmed) {
       try {
         const res = await axios.delete(
-          `http://localhost:3000/api/admin/users/${id}`
+          `https://bhojon-server.vercel.app/api/admin/users/${id}`
         );
         if (res.data.success) {
           Swal.fire("Deleted!", "User has been deleted.", "success");

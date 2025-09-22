@@ -12,7 +12,7 @@ const ManageOrder = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/api/admin/bookings");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/admin/bookings");
       if (res.data.success) {
         setOrders(res.data.bookings);
       } else {
@@ -41,7 +41,7 @@ const ManageOrder = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await axios.delete(`http://localhost:3000/api/admin/bookings/${id}`);
+        const res = await axios.delete(`https://bhojon-server.vercel.app/api/admin/bookings/${id}`);
         if (res.data.success) {
           Swal.fire("Deleted!", "Booking has been cancelled.", "success");
           fetchOrders();
@@ -57,7 +57,7 @@ const ManageOrder = () => {
   const handleUpdateStatus = async (id, status) => {
     try {
       const res = await axios.patch(
-        `http://localhost:3000/api/admin/bookings/${id}`,
+        `https://bhojon-server.vercel.app/api/admin/bookings/${id}`,
         { status }
       );
       if (res.data.success) {

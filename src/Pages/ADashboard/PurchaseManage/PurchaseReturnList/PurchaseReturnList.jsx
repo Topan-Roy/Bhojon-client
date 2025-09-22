@@ -5,7 +5,7 @@ const PurchaseReturnList = () => {
   const [returnedPurchases, setReturnedPurchases] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/purchases")
+    fetch("https://bhojon-server.vercel.app/purchases")
       .then((res) => res.json())
       .then((data) => {
         const returned = data.filter((p) => p.status === "returned");

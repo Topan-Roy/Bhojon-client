@@ -13,7 +13,7 @@ const ReservationTable = () => {
 
   const fetchReservations = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/bookings");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/bookings");
       setReservations(res.data.bookings);
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ const ReservationTable = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:3000/api/admin/bookings/${id}`);
+          await axios.delete(`https://bhojon-server.vercel.app/api/admin/bookings/${id}`);
           setReservations((prev) => prev.filter((r) => r._id !== id));
           Swal.fire("Deleted!", "Reservation has been deleted.", "success");
         } catch (err) {
@@ -45,7 +45,7 @@ const ReservationTable = () => {
   const handleStatusChange = async () => {
     try {
       await axios.patch(
-        `http://localhost:3000/api/admin/bookings/${selected._id}`,
+        `https://bhojon-server.vercel.app/api/admin/bookings/${selected._id}`,
         { status: selected.status }
       );
       setReservations((prev) =>

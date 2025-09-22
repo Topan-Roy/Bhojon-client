@@ -9,7 +9,7 @@ const ItemPurchase = () => {
   const [filtered, setFiltered] = useState([]);
   const [viewPurchase, setViewPurchase] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:3000/purchases")
+    fetch("https://bhojon-server.vercel.app/purchases")
       .then((res) => res.json())
       .then((data) => {
         setPurchases(data);
@@ -35,7 +35,7 @@ const ItemPurchase = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:3000/purchases/${id}`, {
+        const res = await fetch(`https://bhojon-server.vercel.app/purchases/${id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status: "returned" }),

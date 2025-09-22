@@ -26,7 +26,7 @@ const ReservationForm = () => {
     setLoading(true);
     try {
       const formattedDate = date.toISOString().split("T")[0];
-      const res = await axios.get("http://localhost:3000/api/reservations/check", { params: { date: formattedDate, time } });
+      const res = await axios.get("https://bhojon-server.vercel.app/api/reservations/check", { params: { date: formattedDate, time } });
 
       if (res.data.success) {
         setTables(res.data.tables);
@@ -44,7 +44,7 @@ const ReservationForm = () => {
     const customer = { name: user.name, email: user.email, phone: user.phone || "Not Provided" };
 
     try {
-      const res = await axios.post("http://localhost:3000/api/reservations", { date: formattedDate, tableNo, time, people, customer });
+      const res = await axios.post("https://bhojon-server.vercel.app/api/reservations", { date: formattedDate, tableNo, time, people, customer });
       if (res.data.success) {
         Swal.fire({ icon: "success", title: "Booking Confirmed!", text: `Table ${tableNo} booked successfully.` });
         handleCheckAvailability(); 

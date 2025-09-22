@@ -16,11 +16,11 @@ const ProductCard = () => {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/categories")
+    fetch("https://bhojon-server.vercel.app/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data.map((cat) => cat.name)));
 
-    fetch("http://localhost:3000/api/products")
+    fetch("https://bhojon-server.vercel.app/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);

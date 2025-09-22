@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         if (user?.email) {
             axios
-                .get(`http://localhost:3000/users/${user.email}`)
+                .get(`https://bhojon-server.vercel.app/users/${user.email}`)
                 .then((res) => {
                     setProfile(res.data);
                     setRole(res.data.role);
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
         }
     }, [user]);
     useEffect(() => {
-        fetch("http://localhost:3000/api/admin/stats")
+        fetch("https://bhojon-server.vercel.app/api/admin/stats")
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) setStats(data.stats);
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
             .catch((err) => console.error(err));
     }, []);
     useEffect(() => {
-        fetch("http://localhost:3000/api/admin/latest-orders")
+        fetch("https://bhojon-server.vercel.app/api/admin/latest-orders")
             .then((res) => res.json())
             .then((data) => {
                 if (data.success) setLatestOrders(data.latestOrders);

@@ -35,7 +35,7 @@ const AddFoodForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/categories");
+        const res = await axios.get("https://bhojon-server.vercel.app/api/categories");
         setCategories(res.data);
       } catch (err) {
         console.error("Failed to fetch categories:", err);
@@ -86,7 +86,7 @@ const AddFoodForm = () => {
         image: imageUrl,
       };
 
-      const res = await axios.post("http://localhost:3000/api/products", productData);
+      const res = await axios.post("https://bhojon-server.vercel.app/api/products", productData);
 
       if (res.data.success) {
         Swal.fire("Success", "Food added successfully!", "success");

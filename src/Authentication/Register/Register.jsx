@@ -33,7 +33,7 @@ const Register = () => {
         role: "user",
       };
 
-      await axios.post("http://localhost:3000/api/register", userData);
+      await axios.post("https://bhojon-server.vercel.app/api/register", userData);
       Swal.fire({
         icon: "success",
         title: "Registered Successfully",

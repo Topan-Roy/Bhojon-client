@@ -19,7 +19,7 @@ const AddCategoryForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/categories");
+        const res = await axios.get("https://bhojon-server.vercel.app/api/categories");
         setCategories(res.data);
       } catch (err) {
         console.error("Failed to fetch categories:", err);
@@ -74,7 +74,7 @@ const AddCategoryForm = () => {
       }
 
      
-      const res = await axios.post("http://localhost:3000/api/categories", {
+      const res = await axios.post("https://bhojon-server.vercel.app/api/categories", {
         name: formData.categoryName.trim(),
         parentCategory: formData.parentCategory,
         offer: formData.offer,
@@ -87,7 +87,7 @@ const AddCategoryForm = () => {
         handleReset();
 
        
-        const updatedCategories = await axios.get("http://localhost:3000/api/categories");
+        const updatedCategories = await axios.get("https://bhojon-server.vercel.app/api/categories");
         setCategories(updatedCategories.data);
       }
     } catch (err) {

@@ -19,7 +19,7 @@ const Login = () => {
       const userCredential = await signIn(data.email, data.password);
       const email = userCredential.user.email;
 
-      const res = await fetch(`http://localhost:3000/users/${email}`);
+      const res = await fetch(`https://bhojon-server.vercel.app/users/${email}`);
       const userData = await res.json();
 
       Swal.fire({

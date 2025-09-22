@@ -78,7 +78,7 @@ const PurchaseForm = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/purchases", {
+      const res = await fetch("https://bhojon-server.vercel.app/purchases", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(purchaseData),

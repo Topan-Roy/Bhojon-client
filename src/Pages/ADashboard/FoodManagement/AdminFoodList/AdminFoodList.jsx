@@ -13,7 +13,7 @@ const AdminFoodList = () => {
   const fetchFoods = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/api/products");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/products");
       setFoods(res.data);
     } catch (err) {
       console.error(err);
@@ -40,7 +40,7 @@ const AdminFoodList = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axios.delete(`http://localhost:3000/api/products/${id}`);
+          const res = await axios.delete(`https://bhojon-server.vercel.app/api/products/${id}`);
           if (res.data.success) {
             Swal.fire("Deleted!", "Food has been deleted.", "success");
             fetchFoods();
@@ -73,7 +73,7 @@ const AdminFoodList = () => {
 
     if (formValues) {
       try {
-        const res = await axios.put(`http://localhost:3000/api/products/${food._id}`, formValues);
+        const res = await axios.put(`https://bhojon-server.vercel.app/api/products/${food._id}`, formValues);
         if (res.data.success) {
           Swal.fire("Updated!", "Food has been updated.", "success");
           fetchFoods();

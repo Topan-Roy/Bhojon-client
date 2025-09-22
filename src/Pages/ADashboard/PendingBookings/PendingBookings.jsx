@@ -8,7 +8,7 @@ const PendingBookings = () => {
   const fetchPendingOrders = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/api/admin/bookings");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/admin/bookings");
       if (res.data.success) {
         const filtered = res.data.bookings.filter(
           (order) => order.status === "pending"

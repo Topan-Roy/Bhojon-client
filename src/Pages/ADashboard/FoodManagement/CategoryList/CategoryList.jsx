@@ -19,7 +19,7 @@ const CategoryList = () => {
   const [categoriesPerPage] = useState(10); 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/categories");
+      const res = await axios.get("https://bhojon-server.vercel.app/api/categories");
       setCategories(res.data);
     } catch (err) {
       console.error("Failed to fetch categories:", err);
@@ -65,7 +65,7 @@ const CategoryList = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/categories/${editingCategory}`,
+        `https://bhojon-server.vercel.app/api/categories/${editingCategory}`,
         formData
       );
       if (res.data.success) {
@@ -91,7 +91,7 @@ const CategoryList = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await axios.delete(`http://localhost:3000/api/categories/${id}`);
+        const res = await axios.delete(`https://bhojon-server.vercel.app/api/categories/${id}`);
         if (res.data.success) {
           Swal.fire("Deleted!", "Category has been deleted.", "success");
           fetchCategories();
